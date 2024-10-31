@@ -3,9 +3,7 @@ import LogoSquare from 'components/logo-square';
 import { getMenu } from 'lib/wix';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { SocialIcon } from 'react-social-icons/component';
-import 'react-social-icons/instagram';
-import 'react-social-icons/tiktok';
+import { SocialIcon } from 'react-social-icons';
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
 const socialLinks = [
