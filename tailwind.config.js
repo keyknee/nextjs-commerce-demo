@@ -5,8 +5,19 @@ module.exports = {
   content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      backgroundImage: {
+        'page-header-img': "url('/assets/images/home-image.png')",
+        'gradient-theme-primary':
+          'linear-gradient(90deg, rgba(93,3,3,1) 0%, rgba(223,20,20,1) 50%, rgba(93,3,3,1) 100%)'
+      },
+      colors: {
+        'theme-primary': '#df1414',
+        'theme-secondary': '#F1DD80'
+      },
       fontFamily: {
-        sans: ['var(--font-geist-sans)']
+        sans: ['var(--font-geist-sans)'],
+        'decorative-serif': ['var(--font-literata)'],
+        'decorative-script': ['var(--font-ballet)']
       },
       keyframes: {
         fadeIn: {
@@ -22,6 +33,9 @@ module.exports = {
           '20%': { opacity: 1 },
           '100% ': { opacity: 0.2 }
         }
+      },
+      letterSpacing: {
+        tightest: '-.075em'
       },
       animation: {
         fadeIn: 'fadeIn .3s ease-in-out',
@@ -49,6 +63,20 @@ module.exports = {
           values: theme('transitionDelay')
         }
       );
+    }),
+    plugin(({ addComponents }) => {
+      addComponents({
+        '.bg-full-fill': {
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat'
+        },
+        '.font-small-caps': {
+          fontVariant: 'small-caps'
+        },
+        '.text-shadow-sm': {
+          textShadow: '1px 2px 3px black'
+        }
+      });
     })
   ]
 };

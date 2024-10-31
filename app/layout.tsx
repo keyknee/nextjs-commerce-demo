@@ -4,9 +4,22 @@ import { WelcomeToast } from 'components/welcome-toast';
 import { GeistSans } from 'geist/font/sans';
 import { ensureStartsWith } from 'lib/utils';
 import { getCart } from 'lib/wix';
+import { Ballet, Literata } from 'next/font/google';
 import { ReactNode } from 'react';
 import { Toaster } from 'sonner';
 import './globals.css';
+
+const literata = Literata({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-literata'
+});
+
+const ballet = Ballet({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-ballet'
+});
 
 const { TWITTER_CREATOR, TWITTER_SITE, SITE_NAME } = process.env;
 const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
@@ -27,12 +40,12 @@ export const metadata = {
   },
   ...(twitterCreator &&
     twitterSite && {
-    twitter: {
-      card: 'summary_large_image',
-      creator: twitterCreator,
-      site: twitterSite
-    }
-  })
+      twitter: {
+        card: 'summary_large_image',
+        creator: twitterCreator,
+        site: twitterSite
+      }
+    })
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
@@ -40,8 +53,8 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   const cart = getCart();
 
   return (
-    <html lang="en" className={GeistSans.variable}>
-      <body className="bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
+    <html lang="en" className={`${literata.variable} ${ballet.variable} ${GeistSans.variable}`}>
+      <body className="relative bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
         <CartProvider cartPromise={cart}>
           <Navbar />
           <main>
@@ -49,6 +62,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
             <Toaster closeButton />
             <WelcomeToast />
           </main>
+          {/* <Footer /> */}
         </CartProvider>
       </body>
     </html>
