@@ -1,6 +1,7 @@
+import logo from 'assets/images/total-tease-logo.png';
 import FooterMenu from 'components/layout/footer-menu';
-import LogoSquare from 'components/logo-square';
 import { getMenu } from 'lib/wix';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { SocialIcon } from 'react-social-icons';
@@ -20,16 +21,16 @@ export default async function Footer() {
 
   return (
     <footer className="text-sm text-neutral-500 dark:text-neutral-400">
-      <div className="mx-[2em] flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:mx-[calc(5vw)] md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
-        <div className="flex w-full flex-col">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
+        <div>
           <Link className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/">
-            <LogoSquare size="sm" />
+            <Image src={logo} alt="Total Tease logo" height={50} />
             <span className="uppercase">{SITE_NAME}</span>
           </Link>
         </div>
         <Suspense
           fallback={
-            <div className="flex h-[188px] w-[200px] flex-col gap-2">
+            <div className="flex h-[188px] w-[200px] gap-2">
               <div className={skeleton} />
               <div className={skeleton} />
               <div className={skeleton} />
@@ -39,15 +40,15 @@ export default async function Footer() {
             </div>
           }
         >
-          <div className="flex w-full justify-between">
+          <div className="flex w-full items-center justify-between">
             <FooterMenu menu={menu} />
-            <div className="w-full">
+            <div>
               {socialLinks.map((link) => (
                 <SocialIcon
-                  url={link}
                   bgColor="transparent"
                   fgColor="currentColor"
-                  className="text-theme-primary hover:text-theme-secondary mx-px"
+                  url={link}
+                  className="text-theme-primary hover:text-theme-secondary"
                 />
               ))}
             </div>
@@ -55,12 +56,11 @@ export default async function Footer() {
         </Suspense>
       </div>
       <div className="bg-gradient-theme-primary border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
+        <div className="text-white-800 mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
           <p>
             &copy; {copyrightDate} {copyrightName}
             {copyrightName.length && !copyrightName.endsWith('.') ? '.' : ''} All rights reserved.
           </p>
-          <hr className="mx-4 hidden h-4 w-[1px] border-l border-neutral-400 md:inline-block" />
         </div>
       </div>
     </footer>
