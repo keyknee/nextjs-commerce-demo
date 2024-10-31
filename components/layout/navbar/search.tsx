@@ -16,7 +16,7 @@ export default function Search() {
         placeholder="Search..."
         autoComplete="off"
         defaultValue={searchParams?.get('q') || ''}
-        className="focus:outline-theme-secondary text-md border-theme-primary/50 w-full rounded-lg border bg-white px-4 py-2 text-black placeholder:text-neutral-500 md:text-sm dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400"
+        className="focus:outline-theme-primary text-md dark:border-theme-primary/50 w-full rounded-lg border border-slate-800 bg-white px-4 py-2 text-black placeholder:text-neutral-500 md:text-sm dark:bg-transparent dark:text-white dark:placeholder:text-neutral-400"
       />
       <div className="absolute right-0 top-0 mr-3 flex h-full items-center">
         <MagnifyingGlassIcon className="h-4" />

@@ -37,15 +37,15 @@ export async function generateMetadata({
     },
     openGraph: url
       ? {
-        images: [
-          {
-            url,
-            width,
-            height,
-            alt
-          }
-        ]
-      }
+          images: [
+            {
+              url,
+              width,
+              height,
+              alt
+            }
+          ]
+        }
       : null
   };
 }
@@ -77,7 +77,7 @@ export default async function ProductPage({ params }: { params: { handle: string
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(productJsonLd)
+          __html: JSON.stringify(productJsonLd) || ''
         }}
       />
       <div className="mx-auto max-w-screen-2xl px-4">

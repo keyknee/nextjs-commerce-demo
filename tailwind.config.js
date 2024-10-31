@@ -8,7 +8,7 @@ module.exports = {
       backgroundImage: {
         'page-header-img': "url('/assets/images/home-image.png')",
         'gradient-theme-primary':
-          'linear-gradient(90deg, rgba(93,3,3,1) 0%, rgba(223,20,20,1) 50%, rgba(93,3,3,1) 100%)'
+          'linear-gradient(90deg, rgba(93,3,3,1) 0%, rgba(174,16,16,1) 50%, rgba(93,3,3,1) 100%)'
       },
       colors: {
         'theme-primary': '#df1414',

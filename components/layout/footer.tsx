@@ -21,11 +21,20 @@ export default async function Footer() {
 
   return (
     <footer className="text-sm text-neutral-500 dark:text-neutral-400">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm md:gap-12 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 border-t border-neutral-200 px-6 py-3 text-sm md:gap-6 md:px-4 min-[1320px]:px-0 dark:border-neutral-700">
         <div>
           <Link className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/">
             <Image src={logo} alt="Total Tease logo" height={50} />
-            <span className="uppercase">{SITE_NAME}</span>
+            <span className="uppercase">
+              The{' '}
+              <span className="text-theme-secondary font-decorative-serif text-lg font-semibold">
+                {'Total '}
+              </span>
+              <span className="text-theme-primary font-decorative-script relative -bottom-1 -left-2 -mr-1.5 text-lg capitalize">
+                {'Tease '}
+              </span>{' '}
+              Experience
+            </span>
           </Link>
         </div>
         <Suspense
@@ -40,7 +49,7 @@ export default async function Footer() {
             </div>
           }
         >
-          <div className="flex w-full items-center justify-between">
+          <div className="flex w-full flex-wrap items-center justify-between">
             <FooterMenu menu={menu} />
             <div>
               {socialLinks.map((link) => (
@@ -48,7 +57,7 @@ export default async function Footer() {
                   bgColor="transparent"
                   fgColor="currentColor"
                   url={link}
-                  className="text-theme-primary hover:text-theme-secondary"
+                  className="dark:text-theme-secondary hover:text-theme-primary dark:hover:text-theme-primary text-black hover:text-black"
                 />
               ))}
             </div>
@@ -56,7 +65,7 @@ export default async function Footer() {
         </Suspense>
       </div>
       <div className="bg-gradient-theme-primary border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
-        <div className="text-white-800 mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 text-white md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
           <p>
             &copy; {copyrightDate} {copyrightName}
             {copyrightName.length && !copyrightName.endsWith('.') ? '.' : ''} All rights reserved.
