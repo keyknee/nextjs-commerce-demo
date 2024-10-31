@@ -44,6 +44,9 @@ importers:
       react-dom:
         specifier: 19.0.0-rc-3208e73e-20240730
         version: 19.0.0-rc-3208e73e-20240730(react@19.0.0-rc-3208e73e-20240730)
+      react-social-icons:
+        specifier: ^6.18.0
+        version: 6.18.0(react-dom@19.0.0-rc-3208e73e-20240730(react@19.0.0-rc-3208e73e-20240730))(react@19.0.0-rc-3208e73e-20240730)
       sonner:
         specifier: ^1.5.0
         version: 1.5.0(react-dom@19.0.0-rc-3208e73e-20240730(react@19.0.0-rc-3208e73e-20240730))(react@19.0.0-rc-3208e73e-20240730)
@@ -1170,6 +1173,12 @@ packages:
     peerDependencies:
       react: 19.0.0-rc-3208e73e-20240730
 
+  react-social-icons@6.18.0:
+    resolution: {integrity: sha512-eUWAaTw9FDMYjXIXkyt9oqMIwO7l9z68jlNBbfEh/Rsxs0WaUKK5P1OgC1thITOQumgLqzTB10h3Fjzl/IdvGw==}
+    peerDependencies:
+      react: 15.x.x || 16.x.x || 17.x.x || 18.x.x
+      react-dom: 15.x.x || 16.x.x || 17.x.x || 18.x.x
+
   react@19.0.0-rc-3208e73e-20240730:
     resolution: {integrity: sha512-4TmFOcgSfwM8w18vXLnEt8tb3ilO9a0GRJA9zQSYjZ5ie6g/zkxagRvZvZbEmhaNgDSF/PKmEdWmfBtlUBcjkA==}
     engines: {node: '>=0.10.0'}
@@ -1955,7 +1964,7 @@ snapshots:
 
   '@wix/filter-builder@1.0.64':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.7
       kind-of: 5.1.0
       tslib: 2.6.3
 
@@ -2001,11 +2010,11 @@ snapshots:
 
   '@wix/metro-public-utils@1.0.31':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.7
 
   '@wix/metro-public-utils@1.0.34':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.7
 
   '@wix/metro-runtime@1.1779.0':
     dependencies:
@@ -2030,35 +2039,35 @@ snapshots:
 
   '@wix/motion-edm-autogen-common@1.46.0':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.7
       '@wix/motion-edm-autogen-types': 1.0.34
       lodash: 4.17.21
       tslib: 2.6.3
 
   '@wix/motion-edm-autogen-common@1.49.0':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.7
       '@wix/motion-edm-autogen-types': 1.0.37
       lodash: 4.17.21
       tslib: 2.6.3
 
   '@wix/motion-edm-autogen-p13n@1.0.74':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.7
       '@wix/motion-edm-autogen-types': 1.0.34
       lodash: 4.17.21
       querystring: 0.2.1
 
   '@wix/motion-edm-autogen-p13n@1.0.79':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.7
       '@wix/motion-edm-autogen-types': 1.0.37
       lodash: 4.17.21
       querystring: 0.2.1
 
   '@wix/motion-edm-autogen-query-wrapper@1.0.95':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.7
       '@wix/filter-builder': 1.0.64
       '@wix/motion-edm-autogen-common': 1.46.0
       '@wix/motion-edm-autogen-transformations-core': 1.50.0
@@ -2068,7 +2077,7 @@ snapshots:
 
   '@wix/motion-edm-autogen-transformations-core@1.50.0':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.7
       '@rushstack/eslint-patch': 1.10.4
       '@wix/motion-edm-autogen-common': 1.46.0
       constant-case: 3.0.4
@@ -2079,7 +2088,7 @@ snapshots:
 
   '@wix/motion-edm-autogen-transformations-core@1.53.0':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.7
       '@rushstack/eslint-patch': 1.10.4
       '@wix/motion-edm-autogen-common': 1.49.0
       constant-case: 3.0.4
@@ -2090,7 +2099,7 @@ snapshots:
 
   '@wix/motion-edm-autogen-transformations@1.56.0':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.7
       '@rushstack/eslint-patch': 1.10.4
       '@wix/motion-edm-autogen-common': 1.46.0
       '@wix/motion-edm-autogen-transformations-core': 1.50.0
@@ -2104,7 +2113,7 @@ snapshots:
 
   '@wix/motion-edm-autogen-transformations@1.59.0':
     dependencies:
-      '@babel/runtime': 7.25.0
+      '@babel/runtime': 7.25.7
       '@rushstack/eslint-patch': 1.10.4
       '@wix/motion-edm-autogen-common': 1.49.0
       '@wix/motion-edm-autogen-transformations-core': 1.53.0
@@ -2673,6 +2682,12 @@ snapshots:
     dependencies:
       react: 19.0.0-rc-3208e73e-20240730
       scheduler: 0.25.0-rc-3208e73e-20240730
+
+  react-social-icons@6.18.0(react-dom@19.0.0-rc-3208e73e-20240730(react@19.0.0-rc-3208e73e-20240730))(react@19.0.0-rc-3208e73e-20240730):
+    dependencies:
+      '@babel/runtime': 7.25.7
+      react: 19.0.0-rc-3208e73e-20240730
+      react-dom: 19.0.0-rc-3208e73e-20240730(react@19.0.0-rc-3208e73e-20240730)
 
   react@19.0.0-rc-3208e73e-20240730: {}
 
