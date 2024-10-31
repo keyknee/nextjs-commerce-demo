@@ -9,10 +9,10 @@ export default function OpenCart({
   quantity?: number;
 }) {
   return (
-    <div className="relative flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white">
+    <div className="dark:border-theme-primary relative flex h-11 w-11 items-center justify-center rounded-md border border-slate-800 text-black transition-colors dark:border-neutral-700 dark:text-white">
       <ShoppingCartIcon
         className={clsx(
-          'text-theme-primary group-hover:text-theme-secondary group-focus:text-theme-secondary h-4 transition-all ease-in-out group-hover:scale-110',
+          'dark:text-theme-primary dark:group-hover:text-theme-secondary group-hover:text-theme-primary group-focus:text-theme-primary dark:group-focus:text-theme-secondary h-4 text-slate-800 transition-all ease-in-out group-hover:scale-110',
           className
         )}
       />
