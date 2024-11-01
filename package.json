@@ -15,8 +15,10 @@
   "dependencies": {
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
+    "@wix/crm": "^1.0.135",
     "@wix/data": "^1.0.158",
     "@wix/ecom": "^1.0.768",
+    "@wix/email-subscriptions": "^1.0.20",
     "@wix/redirects": "^1.0.58",
     "@wix/sdk": "^1.14.1",
     "@wix/stores": "^1.0.252",

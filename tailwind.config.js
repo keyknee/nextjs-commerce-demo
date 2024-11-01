@@ -8,7 +8,9 @@ module.exports = {
       backgroundImage: {
         'page-header-img': "url('/assets/images/home-image.png')",
         'gradient-theme-primary':
-          'linear-gradient(90deg, rgba(93,3,3,1) 0%, rgba(174,16,16,1) 50%, rgba(93,3,3,1) 100%)'
+          'linear-gradient(90deg, rgba(93,3,3,1) 0%, rgba(174,16,16,1) 50%, rgba(93,3,3,1) 100%)',
+        'gradient-theme-secondary':
+          'linear-gradient(60deg, rgba(225,194,49,1) 0%, rgba(232,205,79,1) 50%, rgba(225,194,49,1) 100%)'
       },
       colors: {
         'theme-primary': '#df1414',
@@ -73,8 +75,14 @@ module.exports = {
         '.font-small-caps': {
           fontVariant: 'small-caps'
         },
+        '.hashtag::before': {
+          content: ''
+        },
         '.text-shadow-sm': {
           textShadow: '1px 2px 3px black'
+        },
+        '.text-shadow-tiny': {
+          textShadow: '0px 1px 1px black'
         }
       });
     })

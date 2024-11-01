@@ -81,6 +81,14 @@ export type Page = {
   updatedAt: string;
 };
 
+export type Section = {
+  id: string;
+  title: string;
+  heading: string;
+  body: string;
+  createdAt: string;
+  updatedAt: string;
+};
 export type Product = {
   id: string;
   handle: string;
