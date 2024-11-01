@@ -52,11 +52,12 @@ export default async function Footer() {
           <div className="flex w-full flex-wrap items-center justify-between">
             <FooterMenu menu={menu} />
             <div>
-              {socialLinks.map((link) => (
+              {socialLinks.map((link, i) => (
                 <SocialIcon
                   bgColor="transparent"
                   fgColor="currentColor"
                   url={link}
+                  key={i}
                   className="dark:text-theme-secondary hover:text-theme-primary dark:hover:text-theme-primary text-black hover:text-black"
                 />
               ))}

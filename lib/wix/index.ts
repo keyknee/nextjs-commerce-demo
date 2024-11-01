@@ -1,11 +1,13 @@
+import { contacts } from '@wix/crm';
 import { items } from '@wix/data';
 import { currentCart, recommendations } from '@wix/ecom';
+import { emailSubscriptions } from '@wix/email-subscriptions';
 import { redirects } from '@wix/redirects';
-import { createClient, media, OAuthStrategy } from '@wix/sdk';
+import { ApiKeyStrategy, createClient, media, OAuthStrategy } from '@wix/sdk';
 import { collections, products } from '@wix/stores';
 import { SortKey, WIX_SESSION_COOKIE } from 'lib/constants';
 import { cookies } from 'next/headers';
-import { Cart, Collection, Menu, Page, Product, ProductVariant } from './types';
+import { Cart, Collection, Menu, Page, Product, ProductVariant, Section } from './types';
 
 const cartesian = <T>(data: T[][]) =>
   data.reduce((a, b) => a.flatMap((d) => b.map((e) => [...d, e])), [[]] as T[][]);
@@ -427,6 +429,29 @@ export async function getPages(): Promise<Page[]> {
   }));
 }
 
+export async function getSection(handle: string): Promise<Section | undefined> {
+  const { queryDataItems } = getWixClient().use(items);
+  const { items: sections } = await queryDataItems({
+    dataCollectionId: 'PageSections'
+  })
+    .eq('title', handle)
+    .limit(1)
+    .find();
+  const section = sections[0];
+  if (!section) {
+    return undefined;
+  } else {
+    return {
+      id: section._id!,
+      title: section.data!.title,
+      heading: section.data!.heading,
+      body: section.data!.body,
+      createdAt: section.data!._createdDate.$date,
+      updatedAt: section.data!._updatedDate.$date
+    };
+  }
+}
+
 export async function getProduct(handle: string): Promise<Product | undefined> {
   const { queryProducts } = getWixClient().use(products);
   const { items } = await queryProducts().eq('slug', handle).limit(1).find();
@@ -513,6 +538,21 @@ export const getWixClient = () => {
   return wixClient;
 };
 
+export const getWixElevatedClient = () => {
+  const wixClient = createClient({
+    auth: ApiKeyStrategy({
+      apiKey: process.env.WIX_API_KEY as string,
+      siteId: process.env.WIX_SITE_ID,
+      accountId: ''
+    }),
+    modules: {
+      contacts: contacts,
+      emailSubscriptions: emailSubscriptions
+    }
+  });
+  return wixClient;
+};
+
 export async function createCheckoutUrl(postFlowUrl: string) {
   const {
     currentCart: { createCheckoutFromCurrentCart },
@@ -531,4 +571,45 @@ export async function createCheckoutUrl(postFlowUrl: string) {
   });
 
   return redirectSession?.fullUrl!;
+}
+
+export async function createContact(
+  info: contacts.ContactInfo,
+  options?: contacts.CreateContactOptions
+): Promise<contacts.CreateContactResponse> {
+  const { createContact } = getWixElevatedClient().use(contacts);
+  return await createContact(info, options);
+}
+
+export async function getContact(email: string): Promise<contacts.Contact | undefined> {
+  const { queryContacts } = getWixElevatedClient().use(contacts);
+  const { items } = await queryContacts().eq('primaryInfo.email', email).limit(1).find();
+  const contact = items[0];
+
+  if (!contact) {
+    return undefined;
+  }
+  return contact;
+}
+
+export async function subscribeUserEmail(email: string) {
+  const { createContact, queryContacts, onContactCreated } = getWixElevatedClient().use(contacts);
+  const { upsertEmailSubscription } = getWixElevatedClient().use(emailSubscriptions);
+
+  //check to see if contact already exists
+  const { items } = await queryContacts().eq('primaryInfo.email', email).limit(1).find();
+  const existingContact = items[0];
+  let newContact;
+
+  if (!existingContact) {
+    newContact = await createContact({ emails: { items: [{ email }] } });
+  }
+
+  const response = await upsertEmailSubscription({
+    subscription: {
+      email: email,
+      subscriptionStatus: emailSubscriptions.SubscriptionEnumStatus.SUBSCRIBED
+    }
+  });
+  return response;
 }
