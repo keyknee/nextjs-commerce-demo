@@ -1,4 +1,5 @@
 'use client';
+import { BrandAccentedHeadings } from 'components/typography';
 import React, { useEffect } from 'react';
 import { useAgeConfirmation } from './context/age-modal-context';
 
@@ -23,12 +24,16 @@ const AgeConfirmationModal: React.FC = () => {
   return (
     <div className="modal-backdrop">
       <div className="modal">
-        <h2 className="font-decorative-serif text-4xl">Are you at least 21 years old?</h2>
+        <BrandAccentedHeadings
+          headingCopy="Confirm Your Age"
+          headingLevel={2}
+          variant="AccentFirstAndLast"
+        />
         <button
           className="mt-6 rounded-md border-2 border-theme-primary/50 px-5 py-2 text-theme-primary shadow-md hover:bg-theme-primary hover:text-neutral-100"
           onClick={confirmAge}
         >
-          Yes, I am 21 or older
+          I am 21 or older
         </button>
       </div>
     </div>
