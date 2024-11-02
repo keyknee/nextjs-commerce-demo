@@ -2,6 +2,7 @@ import { Carousel } from 'components/carousel';
 import { MailingListForm } from 'components/forms';
 import { ThreeItemGrid } from 'components/grid/three-items';
 import AboutTotalTeaseExperience from 'components/page-sections/about';
+import Testimonials from 'components/page-sections/testimonials';
 
 export const metadata = {
   description: 'High-performance ecommerce store built with Next.js, Vercel, and Wix.',
@@ -26,6 +27,7 @@ export default function HomePage() {
           </h1>
         </div>
         <AboutTotalTeaseExperience />
+        <Testimonials />
         <MailingListForm />
       </div>
 

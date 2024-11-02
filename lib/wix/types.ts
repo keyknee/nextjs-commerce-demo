@@ -130,3 +130,10 @@ export type SEO = {
   title: string;
   description: string;
 };
+
+export type Testimonial = {
+  id: string;
+  name?: string;
+  age?: number;
+  quote: string;
+};

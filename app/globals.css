@@ -14,12 +14,38 @@
   }
 }
 
-a,
-input,
-button {
-  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-neutral-600 dark:focus-visible:ring-offset-neutral-900;
+@layer base {
+  a,
+  input,
+  button {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-neutral-600 dark:focus-visible:ring-offset-neutral-900;
+  }
 }
 
+.branded-gold-serif {
+  @apply font-decorative-serif font-bold uppercase text-theme-secondary;
+}
+
+.branded-red-script {
+  @apply relative -bottom-4 -left-2 font-decorative-script font-bold capitalize text-theme-primary;
+}
 .hashtag {
-  @apply before:text-theme-primary before:font-decorative-serif text-shadow-tiny relative before:mr-px before:text-2xl before:font-semibold before:content-['#'];
+  @apply text-shadow-tiny relative before:mr-px before:font-decorative-serif before:text-2xl before:font-semibold before:text-theme-primary before:content-['#'];
+}
+
+.quote::after,
+.quote::before {
+  @apply relative flex h-min w-fit w-full font-decorative-serif text-7xl leading-none text-theme-secondary;
+}
+
+.quote {
+  @apply before:-bottom-9 before:-left-6 before:content-['\201C'] after:-right-6 after:bottom-9 after:justify-end after:content-['\201D'];
+}
+
+#carousel-slide::-webkit-scrollbar {
+  @apply bg-transparent;
+}
+
+#carousel-slide::-webkit-scrollbar-button {
+  @apply border border-black bg-theme-primary;
 }
