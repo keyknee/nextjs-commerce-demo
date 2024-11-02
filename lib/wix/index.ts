@@ -7,7 +7,16 @@ import { ApiKeyStrategy, createClient, media, OAuthStrategy } from '@wix/sdk';
 import { collections, products } from '@wix/stores';
 import { SortKey, WIX_SESSION_COOKIE } from 'lib/constants';
 import { cookies } from 'next/headers';
-import { Cart, Collection, Menu, Page, Product, ProductVariant, Section } from './types';
+import {
+  Cart,
+  Collection,
+  Menu,
+  Page,
+  Product,
+  ProductVariant,
+  Section,
+  Testimonial
+} from './types';
 
 const cartesian = <T>(data: T[][]) =>
   data.reduce((a, b) => a.flatMap((d) => b.map((e) => [...d, e])), [[]] as T[][]);
@@ -450,6 +459,18 @@ export async function getSection(handle: string): Promise<Section | undefined> {
       updatedAt: section.data!._updatedDate.$date
     };
   }
+}
+
+export async function getTestimonials(): Promise<Testimonial[]> {
+  const { queryDataItems } = getWixClient().use(items);
+  const { items: testimonials } = await queryDataItems({ dataCollectionId: 'Testimonials' }).find();
+
+  return testimonials.map((testimonial) => ({
+    id: testimonial._id!,
+    name: testimonial.data?.name,
+    age: testimonial.data?.age,
+    quote: testimonial.data!.quote
+  }));
 }
 
 export async function getProduct(handle: string): Promise<Product | undefined> {

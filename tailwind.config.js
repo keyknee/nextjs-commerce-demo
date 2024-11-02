@@ -69,7 +69,7 @@ module.exports = {
     plugin(({ addComponents }) => {
       addComponents({
         '.bg-full-fill': {
-          backgroundSize: 'cover',
+          backgroundSize: '100vw',
           backgroundRepeat: 'no-repeat'
         },
         '.font-small-caps': {
