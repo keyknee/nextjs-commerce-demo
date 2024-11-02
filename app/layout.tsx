@@ -1,3 +1,5 @@
+import AgeConfirmationModal from 'components/age-modal/age-modal';
+import { AgeConfirmationProvider } from 'components/age-modal/context/age-modal-context';
 import { CartProvider } from 'components/cart/cart-context';
 import Footer from 'components/layout/footer';
 import { Navbar } from 'components/layout/navbar';
@@ -56,15 +58,18 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang="en" className={`${literata.variable} ${ballet.variable} ${GeistSans.variable}`}>
       <body className="relative bg-neutral-50 text-black selection:bg-teal-300 dark:bg-neutral-900 dark:text-white dark:selection:bg-pink-500 dark:selection:text-white">
-        <CartProvider cartPromise={cart}>
-          <Navbar />
-          <main>
-            {children}
-            <Toaster closeButton />
-            <WelcomeToast />
-          </main>
-          <Footer />
-        </CartProvider>
+        <AgeConfirmationProvider>
+          <CartProvider cartPromise={cart}>
+            <AgeConfirmationModal />
+            <Navbar />
+            <main>
+              {children}
+              <Toaster closeButton />
+              <WelcomeToast />
+            </main>
+            <Footer />
+          </CartProvider>
+        </AgeConfirmationProvider>
       </body>
     </html>
   );
