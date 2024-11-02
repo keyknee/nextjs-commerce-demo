@@ -29,8 +29,17 @@
 .branded-red-script {
   @apply relative -bottom-4 -left-2 font-decorative-script font-bold capitalize text-theme-primary;
 }
+
 .hashtag {
   @apply text-shadow-tiny relative before:mr-px before:font-decorative-serif before:text-2xl before:font-semibold before:text-theme-primary before:content-['#'];
+}
+
+.modal-backdrop {
+  @apply fixed left-0 top-0 z-[100] flex h-screen w-screen items-center justify-center bg-neutral-100/60 dark:bg-neutral-900/60;
+}
+
+.modal {
+  @apply bg-neutral-100 p-6 text-center shadow-md dark:bg-neutral-900;
 }
 
 .quote::after,
