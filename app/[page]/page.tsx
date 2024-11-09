@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 
+import { sectionFetcher } from 'components/page-sections';
 import Prose from 'components/prose';
+import { BrandAccentedHeadings } from 'components/typography';
 import { getPage } from 'lib/wix';
 import { notFound } from 'next/navigation';
 
@@ -26,20 +28,31 @@ export async function generateMetadata({
 
 export default async function Page({ params }: { params: { page: string } }) {
   const page = await getPage(params.page);
+  if (!page || params.page === 'home') return notFound();
 
-  if (!page || page.handle === 'home') return notFound();
+  interface CustomStyle extends React.CSSProperties {
+    '--image-url': string;
+  }
 
   return (
     <>
-      <h1 className="mb-8 text-5xl font-bold">{page.title}</h1>
+      {page.headerImage ? (
+        <div
+          style={{ '--image-url': `url(${page?.headerImage?.url || ''})` } as CustomStyle}
+          className="relative h-96 w-full bg-[image:var(--image-url)] bg-cover bg-no-repeat"
+        >
+          <BrandAccentedHeadings
+            headingCopy={page.title}
+            headingLevel={1}
+            className="absolute bottom-0 z-10 mb-8 w-full"
+          />
+          <div className="absolute left-0 top-0 z-[9] h-full w-full bg-gradient-to-t from-red-950" />
+        </div>
+      ) : (
+        <BrandAccentedHeadings headingCopy={page.title} headingLevel={1} className="mb-8" />
+      )}
       <Prose className="mb-8" html={page.body as string} />
-      <p className="text-sm italic">
-        {`This document was last updated on ${new Intl.DateTimeFormat(undefined, {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        }).format(new Date(page.updatedAt))}.`}
-      </p>
+      {page?.pageSections && sectionFetcher(page.pageSections.map((section) => section.title))}
     </>
   );
 }

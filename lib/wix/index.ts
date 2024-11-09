@@ -340,7 +340,7 @@ export async function getMenu(handle: string): Promise<Menu[]> {
 
   const { items: menus } = await queryDataItems({
     dataCollectionId: 'Menus',
-    includeReferencedItems: ['pages']
+    referencedItemOptions: [{ fieldName: 'pages' }]
   })
     .eq('slug', handle)
     .find()
@@ -369,7 +369,8 @@ export async function getPage(handle: string): Promise<Page | undefined> {
   const { queryDataItems } = getWixClient().use(items);
 
   const { items: pages } = await queryDataItems({
-    dataCollectionId: 'Pages'
+    dataCollectionId: 'Pages',
+    referencedItemOptions: [{ fieldName: 'PageSections_pages' }, { fieldName: 'subPages' }]
   })
     .eq('slug', handle)
     .find()
@@ -385,17 +386,49 @@ export async function getPage(handle: string): Promise<Page | undefined> {
     });
 
   const page = pages[0];
-
   if (!page) {
     return undefined;
   }
-
   return {
     id: page._id!,
     title: page.data!.title,
     handle: '/' + page.data!.slug,
     body: page.data!.body,
     bodySummary: '',
+    headerImage: page.data!.headerImage
+      ? {
+          altText: media.getImageUrl(page.data!.headerImage).altText! || 'alt text',
+          url: media.getImageUrl(page.data!.headerImage).url,
+          width: media.getImageUrl(page.data!.headerImage).width,
+          height: media.getImageUrl(page.data!.headerImage).height
+        }
+      : undefined,
+    previewImage: page.data!.previewImage
+      ? {
+          altText: media.getImageUrl(page.data!.previewImage).altText! || 'alt text',
+          url: media.getImageUrl(page.data!.previewImage).url,
+          width: media.getImageUrl(page.data!.previewImage).width,
+          height: media.getImageUrl(page.data!.previewImage).height
+        }
+      : undefined,
+    pageSections: page.data!.PageSections_pages,
+    subPages:
+      page.data!.subPages.length > 0
+        ? page.data!.subPages.map(
+            (subPage: { id: string; slug: string; title: string; previewImage?: string }) => ({
+              handle: subPage.slug,
+              title: subPage.title,
+              previewImage: subPage.previewImage
+                ? {
+                    altText: media.getImageUrl(subPage.previewImage).altText! || 'alt text',
+                    url: media.getImageUrl(subPage.previewImage).url,
+                    width: media.getImageUrl(subPage.previewImage).width,
+                    height: media.getImageUrl(subPage.previewImage).height
+                  }
+                : undefined
+            })
+          )
+        : undefined,
     createdAt: page.data!._createdDate.$date,
     seo: {
       title: page.data!.seoTitle,
@@ -409,7 +442,7 @@ export async function getPages(): Promise<Page[]> {
   const { queryDataItems } = getWixClient().use(items);
 
   const { items: pages } = await queryDataItems({
-    dataCollectionId: 'Pages2'
+    dataCollectionId: 'Pages'
   })
     .find()
     .catch((e) => {
@@ -429,6 +462,22 @@ export async function getPages(): Promise<Page[]> {
     handle: item.data!.slug,
     body: item.data!.body,
     bodySummary: '',
+    headerImage: item.data!.headerImage
+      ? {
+          altText: media.getImageUrl(item.data!.headerImage).altText! || 'alt text',
+          url: media.getImageUrl(item.data!.headerImage).url,
+          width: media.getImageUrl(item.data!.headerImage).width,
+          height: media.getImageUrl(item.data!.headerImage).height
+        }
+      : undefined,
+    previewImage: item.data!.previewImage
+      ? {
+          altText: media.getImageUrl(item.data!.previewImage).altText! || 'alt text',
+          url: media.getImageUrl(item.data!.previewImage).url,
+          width: media.getImageUrl(item.data!.previewImage).width,
+          height: media.getImageUrl(item.data!.previewImage).height
+        }
+      : undefined,
     createdAt: item.data!._createdDate.$date,
     seo: {
       title: item.data!.seoTitle,
@@ -450,7 +499,7 @@ export async function getSection(handle: string): Promise<Section | undefined> {
   if (!section) {
     return undefined;
   } else {
-    return {
+    const data: Section = {
       id: section._id!,
       title: section.data!.title,
       heading: section.data!.heading,
@@ -458,6 +507,15 @@ export async function getSection(handle: string): Promise<Section | undefined> {
       createdAt: section.data!._createdDate.$date,
       updatedAt: section.data!._updatedDate.$date
     };
+    if (section.data!.sectionBackgroundImage) {
+      data['sectionBackgroundImage'] = {
+        url: media.getImageUrl(section.data!.sectionBackgroundImage).url,
+        altText: media.getImageUrl(section.data!.sectionBackgroundImage).altText! ?? 'alt text',
+        width: media.getImageUrl(section.data!.sectionBackgroundImage).width,
+        height: media.getImageUrl(section.data!.sectionBackgroundImage).height
+      };
+    }
+    return data;
   }
 }
 

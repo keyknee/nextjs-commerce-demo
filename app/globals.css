@@ -30,6 +30,14 @@
   @apply relative -bottom-4 -left-2 font-decorative-script font-bold capitalize text-theme-primary;
 }
 
+#carousel-slide::-webkit-scrollbar {
+  @apply bg-transparent;
+}
+
+#carousel-slide::-webkit-scrollbar-button {
+  @apply border border-black bg-theme-primary;
+}
+
 .hashtag {
   @apply text-shadow-tiny relative before:mr-px before:font-decorative-serif before:text-2xl before:font-semibold before:text-theme-primary before:content-['#'];
 }
@@ -51,10 +59,6 @@
   @apply before:-bottom-9 before:-left-6 before:content-['\201C'] after:-right-6 after:bottom-9 after:justify-end after:content-['\201D'];
 }
 
-#carousel-slide::-webkit-scrollbar {
-  @apply bg-transparent;
-}
-
-#carousel-slide::-webkit-scrollbar-button {
-  @apply border border-black bg-theme-primary;
-}
+/* .two-pane-copy {
+  @apply w-full lg:max-w-[50%];
+} */

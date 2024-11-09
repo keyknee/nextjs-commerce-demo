@@ -1,4 +1,4 @@
-import logo from 'assets/images/total-tease-logo.png';
+import logo from 'assets/images/TT_logo.png';
 import CartModal from 'components/cart/modal';
 import { getMenu } from 'lib/wix';
 import { Menu } from 'lib/wix/types';
@@ -31,7 +31,7 @@ export async function Navbar() {
                   <Link
                     href={item.path}
                     prefetch={true}
-                    className="font-decorative-serif font-small-caps hover:text-theme-primary dark:hover:text-theme-primary dark:text-theme-secondary text-lg font-semibold text-black underline-offset-8 hover:text-black hover:underline"
+                    className="font-small-caps font-decorative-serif text-lg font-semibold text-black underline-offset-8 hover:text-black hover:text-theme-primary hover:underline dark:text-theme-secondary dark:hover:text-theme-primary"
                   >
                     {item.title}
                   </Link>

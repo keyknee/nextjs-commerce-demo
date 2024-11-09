@@ -32,7 +32,7 @@ export default async function Testimonials() {
   const section = await getSection('Testimonials');
   const testimonials = await getTestimonials();
   return section ? (
-    <section className="w-full bg-neutral-100 p-12 dark:bg-neutral-900">
+    <>
       <BrandAccentedHeadings
         headingCopy={section.heading}
         headingLevel={2}
@@ -46,6 +46,6 @@ export default async function Testimonials() {
           ))}
         </Carousel>
       </div>
-    </section>
+    </>
   ) : null;
 }

@@ -76,16 +76,21 @@ export type Page = {
   handle: string;
   body: string;
   bodySummary: string;
+  headerImage?: Image;
+  previewImage?: Image;
   seo?: SEO;
   createdAt: string;
   updatedAt: string;
+  pageSections?: Section[];
+  subPages?: Page[];
 };
 
 export type Section = {
   id: string;
-  title: string;
+  title: 'About' | 'OnlyFans Banner' | 'Testimonials';
   heading: string;
   body: string;
+  sectionBackgroundImage?: Image;
   createdAt: string;
   updatedAt: string;
 };

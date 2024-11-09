@@ -1,4 +1,4 @@
-import logo from 'assets/images/total-tease-logo.png';
+import logo from 'assets/images/TT_logo.png';
 import FooterMenu from 'components/layout/footer-menu';
 import { getMenu } from 'lib/wix';
 import Image from 'next/image';
@@ -9,7 +9,8 @@ import { SocialIcon } from 'react-social-icons';
 const { COMPANY_NAME, SITE_NAME } = process.env;
 const socialLinks = [
   'https://www.instagram.com/_totaltease/',
-  'https://www.tiktok.com/@totalteaseexperie'
+  'https://www.tiktok.com/@totalteaseexperie',
+  'https://onlyfans.com/totalteasexxx'
 ];
 
 export default async function Footer() {
@@ -27,10 +28,10 @@ export default async function Footer() {
             <Image src={logo} alt="Total Tease logo" height={50} />
             <span className="uppercase">
               The{' '}
-              <span className="text-theme-secondary font-decorative-serif text-lg font-semibold">
+              <span className="font-decorative-serif text-lg font-semibold text-theme-secondary">
                 {'Total '}
               </span>
-              <span className="text-theme-primary font-decorative-script relative -bottom-1 -left-2 -mr-1.5 text-lg capitalize">
+              <span className="relative -bottom-1 -left-2 -mr-1.5 font-decorative-script text-lg capitalize text-theme-primary">
                 {'Tease '}
               </span>{' '}
               Experience
@@ -58,14 +59,14 @@ export default async function Footer() {
                   fgColor="currentColor"
                   url={link}
                   key={i}
-                  className="dark:text-theme-secondary hover:text-theme-primary dark:hover:text-theme-primary text-black hover:text-black"
+                  className="text-black hover:text-black hover:text-theme-primary dark:text-theme-secondary dark:hover:text-theme-primary"
                 />
               ))}
             </div>
           </div>
         </Suspense>
       </div>
-      <div className="bg-gradient-theme-primary border-t border-neutral-200 py-6 text-sm dark:border-neutral-700">
+      <div className="border-t border-neutral-200 bg-gradient-theme-primary py-6 text-sm dark:border-neutral-700">
         <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-1 px-4 text-white md:flex-row md:gap-0 md:px-4 min-[1320px]:px-0">
           <p>
             &copy; {copyrightDate} {copyrightName}
