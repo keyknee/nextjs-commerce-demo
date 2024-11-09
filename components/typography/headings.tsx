@@ -1,13 +1,15 @@
+import clsx from 'clsx';
 import React from 'react';
 
 interface Props {
   headingCopy: string;
   headingLevel: 1 | 2 | 3 | 4 | 5 | 6;
-  variant?: 'AccentLastTwo' | 'AccentFirstAndLast';
+  variant?: 'AccentLastTwo' | 'AccentFirstAndLast' | 'AccentLastThree';
+  className?: string;
 }
 
 export function BrandAccentedHeadings(props: Props) {
-  const { headingCopy, headingLevel, variant } = props;
+  const { headingCopy, headingLevel, variant, className } = props;
   const headingParts = headingCopy.split(' ') || [];
 
   const HeadingTag = `h${headingLevel}` as keyof JSX.IntrinsicElements;
@@ -16,9 +18,14 @@ export function BrandAccentedHeadings(props: Props) {
     case 'AccentLastTwo':
       return React.createElement(
         HeadingTag,
-        { className: `text-center font-decorative-serif text-5xl font-semibold uppercase` },
+        {
+          className: clsx(
+            `text-center font-decorative-serif text-5xl font-semibold uppercase`,
+            className
+          )
+        },
         <>
-          {headingParts?.slice(0, headingParts.length - 2)}{' '}
+          {headingParts?.slice(0, headingParts.length - 2).join(' ')}{' '}
           <span className="branded-gold-serif">{headingParts?.at(-2)} </span>
           <span className="branded-red-script text-7xl">{headingParts?.at(-1)}</span>
         </>
@@ -27,7 +34,12 @@ export function BrandAccentedHeadings(props: Props) {
     case 'AccentFirstAndLast':
       return React.createElement(
         HeadingTag,
-        { className: `text-center font-decorative-serif text-5xl font-semibold uppercase` },
+        {
+          className: clsx(
+            `text-center font-decorative-serif text-5xl font-semibold uppercase`,
+            className
+          )
+        },
         <>
           <span className="branded-gold-serif">{headingParts?.at(0)} </span>
           {headingParts.slice(1, -1).join(' ')}
@@ -35,10 +47,31 @@ export function BrandAccentedHeadings(props: Props) {
         </>
       );
 
+    case 'AccentLastThree':
+      return React.createElement(
+        HeadingTag,
+        {
+          className: clsx(
+            `text-center font-decorative-serif text-5xl font-semibold uppercase`,
+            className
+          )
+        },
+        <>
+          {headingParts?.slice(0, headingParts.length - 3).join(' ')}{' '}
+          <span className="branded-gold-serif">{headingParts?.at(-3)} </span>
+          {headingParts?.at(-2)}{' '}
+          <span className="branded-red-script text-7xl">{headingParts?.at(-1)}</span>
+        </>
+      );
     default:
       return React.createElement(
         HeadingTag,
-        { className: `text-center font-decorative-serif text-5xl font-semibold uppercase` },
+        {
+          className: clsx(
+            `text-center font-decorative-serif text-5xl font-semibold uppercase`,
+            className
+          )
+        },
         headingCopy
       );
   }
