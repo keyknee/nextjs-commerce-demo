@@ -83,12 +83,15 @@ export type Page = {
   updatedAt: string;
   pageSections?: Section[];
   subPages?: Page[];
+  isSubPage: boolean;
+  parentPage?: string;
 };
 
 export type Section = {
   id: string;
   title: 'About' | 'OnlyFans Banner' | 'Testimonials';
   heading: string;
+  subHeading?: string;
   body: string;
   sectionBackgroundImage?: Image;
   createdAt: string;

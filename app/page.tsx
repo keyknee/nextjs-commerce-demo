@@ -1,7 +1,6 @@
 import { Carousel } from 'components/carousel';
 import { MailingListForm } from 'components/forms';
 import { ThreeItemGrid } from 'components/grid/three-items';
-// import { AboutTotalTeaseExperience, OnlyFansBanner, Testimonials } from 'components/page-sections';
 import { sectionFetcher } from 'components/page-sections';
 import { getPage } from 'lib/wix';
 

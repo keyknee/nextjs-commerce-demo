@@ -4,7 +4,7 @@ import { getPage, getSection } from 'lib/wix';
 import Image from 'next/image';
 import Link from 'next/link';
 
-export default async function FlavorsOfTease() {
+export async function FlavorsOfTease() {
   const section = await getSection('Flavors of Tease Grid');
   const teasePages = await getPage('flavors-of-tease').then((page) => page?.subPages);
   return (

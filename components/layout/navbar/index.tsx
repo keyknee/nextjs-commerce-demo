@@ -1,12 +1,10 @@
 import logo from 'assets/images/TT_logo.png';
-import CartModal from 'components/cart/modal';
 import { getMenu } from 'lib/wix';
 import { Menu } from 'lib/wix/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
-import Search, { SearchSkeleton } from './search';
 
 const { SITE_NAME } = process.env;
 
@@ -40,12 +38,12 @@ export async function Navbar() {
             </ul>
           ) : null}
         </div>
-        <div className="hidden items-center gap-4 min-[870px]:flex">
+        {/* <div className="hidden items-center gap-4 min-[870px]:flex">
           <Suspense fallback={<SearchSkeleton />}>
             <Search />
           </Suspense>
           <CartModal />
-        </div>
+        </div> */}
       </div>
       <div className="block flex-none min-[870px]:hidden">
         <Suspense fallback={null}>
