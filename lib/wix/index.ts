@@ -370,7 +370,11 @@ export async function getPage(handle: string): Promise<Page | undefined> {
 
   const { items: pages } = await queryDataItems({
     dataCollectionId: 'Pages',
-    referencedItemOptions: [{ fieldName: 'PageSections_pages' }, { fieldName: 'subPages' }]
+    referencedItemOptions: [
+      { fieldName: 'PageSections_pages' },
+      { fieldName: 'subPages' },
+      { fieldName: 'Pages_subPages' }
+    ]
   })
     .eq('slug', handle)
     .find()
@@ -429,6 +433,10 @@ export async function getPage(handle: string): Promise<Page | undefined> {
             })
           )
         : undefined,
+    isSubPage: page.data!.Pages_subPages.length ? true : false,
+    parentPage: page.data!.Pages_subPages.map(
+      (page: { id: string; slug: string; title: string; previewImage?: string }) => page.slug
+    ),
     createdAt: page.data!._createdDate.$date,
     seo: {
       title: page.data!.seoTitle,
@@ -478,6 +486,7 @@ export async function getPages(): Promise<Page[]> {
           height: media.getImageUrl(item.data!.previewImage).height
         }
       : undefined,
+    isSubPage: item.data!.Pages_subPages.length ? true : false,
     createdAt: item.data!._createdDate.$date,
     seo: {
       title: item.data!.seoTitle,

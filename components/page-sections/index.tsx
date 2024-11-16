@@ -1,10 +1,8 @@
 import React from 'react';
-import AboutTotalTeaseExperience from './about';
-import BreakingTheTaboo from './breaking-the-taboo';
-import FlavorsOfTease from './flavors-of-tease';
-import OnlyFansBanner from './of-banner';
+import { AboutTotalTeaseExperience, OurPhilosophy } from './centered';
+import { FlavorsOfTease } from './grid';
 import Testimonials from './testimonials';
-import WhatIsATotalTease from './whats-a-total-tease';
+import { BreakingTheTaboo, MeetOurFounder, OnlyFansBanner, WhatIsATotalTease } from './two-pane';
 
 //custom type interface to handle our section wrapper props
 interface WrapperProps {
@@ -34,6 +32,8 @@ export const TestimonialsSection = withSectionWrapper(Testimonials);
 export const FlavorsOfTeaseSection = withSectionWrapper(FlavorsOfTease);
 export const WhatIsATotalTeaseSection = withSectionWrapper(WhatIsATotalTease);
 export const BreakingTheTabooSection = withSectionWrapper(BreakingTheTaboo);
+export const MeetOurFounderSection = withSectionWrapper(MeetOurFounder);
+export const OurPhilosophySection = withSectionWrapper(OurPhilosophy);
 
 /* 
 an additional HOC that allows each page to fetch all of their sections together. 
@@ -45,7 +45,9 @@ const sectionMap = {
   Testimonials: TestimonialsSection,
   'Flavors of Tease Grid': FlavorsOfTeaseSection,
   'What is a Total Tease': WhatIsATotalTeaseSection,
-  'Breaking the Taboo': BreakingTheTabooSection
+  'Breaking the Taboo': BreakingTheTabooSection,
+  'Meet Our Founder': MeetOurFounderSection,
+  'Our Philosophy': OurPhilosophySection
 };
 
 export function sectionFetcher(sectionKeys: Array<keyof typeof sectionMap>) {

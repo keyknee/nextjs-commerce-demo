@@ -19,7 +19,7 @@ export default function MailingListForm() {
       <div className="my-2 text-center text-xl">
         <p>Join our mailing list and get access to special deals exclusive to our subscribers.</p>
       </div>
-      <div className="mt-12 flex w-full gap-6 px-[20%]">
+      <div className="mt-12 flex w-full gap-6 px-4 md:px-[20%]">
         <label htmlFor="email" className="hidden">
           Email Address
         </label>

@@ -23,8 +23,11 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({ params }: { params: { subPage: string } }) {
-  const page = await getPage(params.subPage);
+export default async function Page({ params }: { params: { page: string; subPage: string } }) {
+  const page = await getPage(params.subPage).then((page) =>
+    page?.parentPage?.includes(params.page) ? page : undefined
+  );
+  console.log(page);
   if (!page) return notFound();
   return <></>;
 }

@@ -20,7 +20,7 @@ export function BrandAccentedHeadings(props: Props) {
         HeadingTag,
         {
           className: clsx(
-            `text-center font-decorative-serif text-5xl font-semibold uppercase`,
+            `text-shadow-sm text-center font-decorative-serif text-5xl font-semibold uppercase`,
             className
           )
         },
@@ -36,7 +36,7 @@ export function BrandAccentedHeadings(props: Props) {
         HeadingTag,
         {
           className: clsx(
-            `text-center font-decorative-serif text-5xl font-semibold uppercase`,
+            `text-shadow-sm text-center font-decorative-serif text-5xl font-semibold uppercase`,
             className
           )
         },
@@ -52,7 +52,7 @@ export function BrandAccentedHeadings(props: Props) {
         HeadingTag,
         {
           className: clsx(
-            `text-center font-decorative-serif text-5xl font-semibold uppercase`,
+            `text-shadow-sm text-center font-decorative-serif text-5xl font-semibold uppercase`,
             className
           )
         },
@@ -68,7 +68,7 @@ export function BrandAccentedHeadings(props: Props) {
         HeadingTag,
         {
           className: clsx(
-            `text-center font-decorative-serif text-5xl font-semibold uppercase`,
+            `text-shadow-sm text-center font-decorative-serif text-5xl font-semibold uppercase`,
             className
           )
         },

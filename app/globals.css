@@ -29,7 +29,9 @@
 .branded-red-script {
   @apply relative -bottom-4 -left-2 font-decorative-script font-bold capitalize text-theme-primary;
 }
-
+.card {
+  @apply rounded-lg p-6;
+}
 #carousel-slide::-webkit-scrollbar {
   @apply bg-transparent;
 }
@@ -48,6 +50,10 @@
 
 .modal {
   @apply bg-neutral-100 p-6 text-center shadow-md dark:bg-neutral-900;
+}
+
+.our-philosophy h6 {
+  @apply text-theme-primary;
 }
 
 .quote::after,
