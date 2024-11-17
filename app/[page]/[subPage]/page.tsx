@@ -27,7 +27,6 @@ export default async function Page({ params }: { params: { page: string; subPage
   const page = await getPage(params.subPage).then((page) =>
     page?.parentPage?.includes(params.page) ? page : undefined
   );
-  console.log(page);
   if (!page) return notFound();
   return <></>;
 }

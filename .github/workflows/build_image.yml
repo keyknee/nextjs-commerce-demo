@@ -1,0 +1,54 @@
+name: Build and Push Container Image
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Podman
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y podman
+
+      # Option 1: Create .env file from secrets
+      - name: Create .env file
+        run: |
+          cat << EOF > .env
+          WIX_CLIENT_ID=${{ secrets.WIX_CLIENT_ID }}
+          WIX_API_KEY=${{ secrets.WIX_API_KEY }}
+          WIX_SITE_ID=${{ secrets.WIX_SITE_ID }}
+          EOF
+
+      - name: Log in to GitHub Container registry
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | podman login ghcr.io -u $ --password-stdin
+
+      - name: Build container image
+        run: |
+          podman build \
+            --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
+            --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
+            .
+
+      - name: Push image to GitHub Container registry
+        # Only push on push to main, not on pull requests
+        if: github.event_name != 'pull_request'
+        run: |
+          podman push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          podman push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
