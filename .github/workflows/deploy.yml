@@ -30,6 +30,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Login to registry and pull image
         uses: appleboy/ssh-action@v1.2.0
         with:
