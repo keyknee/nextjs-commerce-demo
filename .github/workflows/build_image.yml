@@ -47,13 +47,6 @@ jobs:
             --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
             .
 
-      - name: Push image to GitHub Container registry
-        # Only push on push to main, not on pull requests
-        if: github.event_name != 'pull_request'
-        run: |
-          podman push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
-          podman push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-
   push-image:
     name: Push image to GitHub Container registry
     runs-on: ubuntu-latest
