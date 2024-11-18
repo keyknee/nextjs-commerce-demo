@@ -46,6 +46,6 @@ USER nonroot
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV PORT=8080
+ENV PORT=3000
 EXPOSE ${PORT}
 CMD ["node_modules/.bin/next", "start", "-H", "0.0.0.0"]
