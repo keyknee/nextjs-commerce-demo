@@ -59,6 +59,9 @@ jobs:
     needs: build-and-push-image
     if: github.event_name != 'pull_request'
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
       - uses: ./.github/workflows/deploy.yml
         with:
           SSH_HOST: ${{ secrets.SSH_HOST }}
