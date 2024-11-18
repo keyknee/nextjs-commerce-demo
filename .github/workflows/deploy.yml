@@ -40,7 +40,7 @@ jobs:
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            echo "${{ secrets.GITHUB_TOKEN }}" | podman login ghcr.io -u $ --password-stdin
+            echo `${{ secrets.GITHUB_TOKEN }}` | podman login ghcr.io -u $ --password-stdin
             podman pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image_tag }}
 
       - name: Deploy container
