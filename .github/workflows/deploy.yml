@@ -1,0 +1,75 @@
+name: Deploy Container
+
+on:
+  workflow_dispatch: # Manual trigger
+  workflow_call: # Callable by other workflows
+    inputs:
+      image_tag:
+        description: 'Tag of the image to deploy (default: latest)'
+        required: false
+        type: string
+        default: 'latest'
+    secrets:
+      SSH_HOST:
+        description: 'IP address of SSH host'
+        required: true
+      SSH_USERNAME:
+        description: 'username to use to connect to SSH host'
+        required: true
+      SSH_KEY:
+        description: 'private key to use to connect to SSH host'
+        required: true
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+  CONTAINER_NAME: totaltease
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Login to registry and pull image
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            echo "${{ secrets.GITHUB_TOKEN }}" | podman login ghcr.io -u $ --password-stdin
+            podman pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image_tag }}
+
+      - name: Deploy container
+        uses: appleboy/ssh-action@v1.2.0
+        id: container-check
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            if podman container exists ${{ env.CONTAINER_NAME }}; then
+              podman restart ${{ env.CONTAINER_NAME }}
+            else
+              podman run -d \
+              --name ${{ env.CONTAINER_NAME }} \
+              -p ${{ vars.CONTAINER_HOST_PORT }}:3000 \
+              ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image_tag }}
+
+      - name: Verify deployment
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            if ! podman container exists ${{ env.CONTAINER_NAME }}; then
+              echo "Container failed to start"
+              podman logs ${{ env.CONTAINER_NAME }}
+              exit 1
+            fi
+            echo "Container is running"
+            podman ps -f name=${{ env.CONTAINER_NAME }}
