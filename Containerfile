@@ -41,7 +41,6 @@ COPY --from=builder --chown=nonroot:nonroot /app/next.config.* ./
 # COPY --from=builder --chown=nonroot:nonroot /app/public* ./public
 COPY --from=builder --chown=nonroot:nonroot /app/.next ./.next
 COPY --from=builder --chown=nonroot:nonroot /app/node_modules ./node_modules
-COPY --from=builder --chown=nonroot:nonroot /app/.env ./.env
 
 USER nonroot
 

@@ -27,15 +27,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y podman
 
-      # Option 1: Create .env file from secrets
-      - name: Create .env file
-        run: |
-          cat << EOF > .env
-          WIX_CLIENT_ID=${{ secrets.WIX_CLIENT_ID }}
-          WIX_API_KEY=${{ secrets.WIX_API_KEY }}
-          WIX_SITE_ID=${{ secrets.WIX_SITE_ID }}
-          EOF
-
       - name: Log in to GitHub Container registry
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" | podman login ghcr.io -u $ --password-stdin
@@ -43,6 +34,9 @@ jobs:
       - name: Build container image
         run: |
           podman build \
+            -env WIX_CLIENT_ID=${{ secrets.WIX_CLIENT_ID }}
+            -env WIX_API_KEY=${{ secrets.WIX_API_KEY }}
+            -env WIX_SITE_ID=${{ secrets.WIX_SITE_ID }}
             --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }} \
             --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest \
             .
