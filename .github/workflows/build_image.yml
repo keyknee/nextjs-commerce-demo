@@ -57,7 +57,7 @@ jobs:
   trigger-deploy:
     needs: build-and-push-image
     if: github.event_name != 'pull_request'
-    uses: ./.github/workflows/deploy.yml@main
+    uses: ./.github/workflows/deploy.yml
     secrets:
       SSH_HOST: ${{ secrets.SSH_HOST }}
       SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
