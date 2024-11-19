@@ -53,3 +53,14 @@ jobs:
         run: |
           podman push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
           podman push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+  trigger-deploy:
+    needs: build-and-push-image
+    if: github.event_name != 'pull_request'
+    uses: ./.github/workflows/deploy.yml
+    secrets:
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+      SSH_KEY: ${{ secrets.SSH_KEY }}
+    with:
+      image_tag: ${{ github.sha }}
