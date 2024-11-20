@@ -19,6 +19,15 @@ on:
       SSH_KEY:
         description: 'private key to use to connect to SSH host'
         required: true
+      WIX_CLIENT_ID:
+        description: 'ClientID needed for Wix API'
+        required: true
+      WIX_API_KEY:
+        description: 'API key needed for elevated calls to the Wix API'
+        required: false
+      WIX_SITE_ID:
+        description: 'SiteID needed for elevated calls to the Wix API'
+        required: false
 
 env:
   REGISTRY: ghcr.io
@@ -53,6 +62,9 @@ jobs:
             else
               podman run -d \
                 --name ${{ env.CONTAINER_NAME }} \
+                --env WIX_CLIENT_ID=${{ secrets.WIX_CLIENT_ID }} \
+                --env WIX_API_KEY=${{ secrets.WIX_API_KEY }} \
+                --env WIX_SITE_ID=${{ secrets.WIX_SITE_ID }} \
                 -p ${{ vars.CONTAINER_HOST_PORT }}:3000 \
                 ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image_tag }}
             fi
