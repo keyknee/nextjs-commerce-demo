@@ -49,7 +49,7 @@ jobs:
             echo "${{ secrets.GITHUB_TOKEN }}" | podman login ghcr.io -u $ --password-stdin
             podman pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image_tag }}
 
-      - name: Deploy container
+      - name: Handle existing container
         uses: appleboy/ssh-action@v1.2.0
         id: container-check
         with:
@@ -58,16 +58,24 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             if podman container exists ${{ env.CONTAINER_NAME }}; then
-              podman restart ${{ env.CONTAINER_NAME }}
-            else
-              podman run -d \
-                --name ${{ env.CONTAINER_NAME }} \
-                --env WIX_CLIENT_ID=${{ secrets.WIX_CLIENT_ID }} \
-                --env WIX_API_KEY=${{ secrets.WIX_API_KEY }} \
-                --env WIX_SITE_ID=${{ secrets.WIX_SITE_ID }} \
-                -p ${{ vars.CONTAINER_HOST_PORT }}:3000 \
-                ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image_tag }}
+              podman stop ${{ env.CONTAINER_NAME }} && podman rm ${{ env.CONTAINER_NAME }}
             fi
+
+      - name: Start new container
+        uses: appleboy/ssh-action@v1.2.0
+        id: start-container
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            podman run -d \
+              --name ${{ env.CONTAINER_NAME }} \
+              --env WIX_CLIENT_ID=${{ secrets.WIX_CLIENT_ID }} \
+              --env WIX_API_KEY=${{ secrets.WIX_API_KEY }} \
+              --env WIX_SITE_ID=${{ secrets.WIX_SITE_ID }} \
+              -p ${{ vars.CONTAINER_HOST_PORT }}:3000 \
+              ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image_tag }}
 
       - name: Verify deployment
         uses: appleboy/ssh-action@v1.2.0
