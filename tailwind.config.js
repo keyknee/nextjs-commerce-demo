@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'textured-gold': "url('assets/images/gold_textured_bg.jpg')",
+        'textured-gold': "url('/assets/images/gold_textured_bg.jpg')",
         'gradient-theme-primary':
           'linear-gradient(90deg, rgba(93,3,3,1) 0%, rgba(174,16,16,1) 50%, rgba(93,3,3,1) 100%)',
         'gradient-theme-secondary':
