@@ -40,3 +40,28 @@ export async function FlavorsOfTease() {
     </>
   );
 }
+
+export async function PhotoGrid() {
+  const section = await getSection('Home Photo Grid');
+  return (
+    <>
+      {section?.mediagallery ? (
+        <Grid className="grid-cols-1 gap-0.5 sm:grid-cols-2 lg:grid-cols-3">
+          {section.mediagallery.map((image) => (
+            <Image
+              key={image.url}
+              src={image!.url}
+              alt={image!.altText}
+              height={image!.height}
+              width={image!.width}
+              style={{
+                width: '100%',
+                height: 'auto'
+              }}
+            />
+          ))}
+        </Grid>
+      ) : null}
+    </>
+  );
+}

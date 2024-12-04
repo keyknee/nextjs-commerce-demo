@@ -6,20 +6,24 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'page-header-img': "url('/assets/images/home-image.png')",
+        'textured-gold': "url('assets/images/gold_textured_bg.jpg')",
         'gradient-theme-primary':
           'linear-gradient(90deg, rgba(93,3,3,1) 0%, rgba(174,16,16,1) 50%, rgba(93,3,3,1) 100%)',
         'gradient-theme-secondary':
-          'linear-gradient(60deg, rgba(225,194,49,1) 0%, rgba(232,205,79,1) 50%, rgba(225,194,49,1) 100%)'
+          'linear-gradient(60deg, rgba(225,194,49,1) 0%, rgba(232,205,79,1) 50%, rgba(225,194,49,1) 100%)',
+        'radial-dark':
+          'radial-gradient(ellipse closest-side, rgba(0,0,0,0.0) 16%, rgba(23,23,23,1) 95%)',
+        'radial-light': 'radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.0) 16%, #f5f5f5 95%)'
       },
       colors: {
         'theme-primary': '#df1414',
-        'theme-secondary': '#F1DD80'
+        'theme-secondary': '#D4AF37'
       },
       fontFamily: {
         sans: ['var(--font-geist-sans)'],
         'decorative-serif': ['var(--font-literata)'],
-        'decorative-script': ['var(--font-ballet)']
+        'decorative-script': ['var(--font-ballet)'],
+        icon: 'MaterialIcon'
       },
       keyframes: {
         fadeIn: {

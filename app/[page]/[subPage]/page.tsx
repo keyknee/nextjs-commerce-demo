@@ -28,5 +28,6 @@ export default async function Page({ params }: { params: { page: string; subPage
     page?.parentPage?.includes(params.page) ? page : undefined
   );
   if (!page) return notFound();
+  console.log(params);
   return <></>;
 }

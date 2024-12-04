@@ -1,6 +1,6 @@
 import React from 'react';
 import { AboutTotalTeaseExperience, OurPhilosophy } from './centered';
-import { FlavorsOfTease } from './grid';
+import { FlavorsOfTease, PhotoGrid } from './grid';
 import Testimonials from './testimonials';
 import { BreakingTheTaboo, MeetOurFounder, OnlyFansBanner, WhatIsATotalTease } from './two-pane';
 
@@ -34,6 +34,7 @@ export const WhatIsATotalTeaseSection = withSectionWrapper(WhatIsATotalTease);
 export const BreakingTheTabooSection = withSectionWrapper(BreakingTheTaboo);
 export const MeetOurFounderSection = withSectionWrapper(MeetOurFounder);
 export const OurPhilosophySection = withSectionWrapper(OurPhilosophy);
+export const PhotoGridSection = withSectionWrapper(PhotoGrid);
 
 /* 
 an additional HOC that allows each page to fetch all of their sections together. 
@@ -47,7 +48,8 @@ const sectionMap = {
   'What is a Total Tease': WhatIsATotalTeaseSection,
   'Breaking the Taboo': BreakingTheTabooSection,
   'Meet Our Founder': MeetOurFounderSection,
-  'Our Philosophy': OurPhilosophySection
+  'Our Philosophy': OurPhilosophySection,
+  'Home Photo Grid': PhotoGridSection
 };
 
 export function sectionFetcher(sectionKeys: Array<keyof typeof sectionMap>) {

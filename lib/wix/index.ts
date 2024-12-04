@@ -2,6 +2,9 @@ import { contacts } from '@wix/crm';
 import { items } from '@wix/data';
 import { currentCart, recommendations } from '@wix/ecom';
 import { emailSubscriptions } from '@wix/email-subscriptions';
+import { groups } from '@wix/groups';
+import { members } from '@wix/members';
+import { orders, plans } from '@wix/pricing-plans';
 import { redirects } from '@wix/redirects';
 import { ApiKeyStrategy, createClient, media, OAuthStrategy } from '@wix/sdk';
 import { collections, products } from '@wix/stores';
@@ -10,11 +13,13 @@ import { cookies } from 'next/headers';
 import {
   Cart,
   Collection,
+  Membership,
   Menu,
   Page,
   Product,
   ProductVariant,
   Section,
+  Service,
   Testimonial
 } from './types';
 
@@ -512,7 +517,16 @@ export async function getSection(handle: string): Promise<Section | undefined> {
       id: section._id!,
       title: section.data!.title,
       heading: section.data!.heading,
+      subHeading: section.data!.subHeading,
       body: section.data!.body,
+      mediagallery: section.data!.mediagallery
+        ? section.data!.mediagallery.map((image: { src: string }) => ({
+            url: media.getImageUrl(image.src).url,
+            altText: media.getImageUrl(image.src).altText! ?? 'alt text',
+            width: media.getImageUrl(image.src).width,
+            height: media.getImageUrl(image.src).height
+          }))
+        : undefined,
       createdAt: section.data!._createdDate.$date,
       updatedAt: section.data!._updatedDate.$date
     };
@@ -635,7 +649,8 @@ export const getWixElevatedClient = () => {
     }),
     modules: {
       contacts: contacts,
-      emailSubscriptions: emailSubscriptions
+      emailSubscriptions: emailSubscriptions,
+      members: members
     }
   });
   return wixClient;
@@ -680,6 +695,17 @@ export async function getContact(email: string): Promise<contacts.Contact | unde
   return contact;
 }
 
+export async function getMemberContact(contactId: string): Promise<contacts.Contact | undefined> {
+  const { queryContacts } = getWixElevatedClient().use(contacts);
+  const { items } = await queryContacts().eq('_id', contactId).limit(1).find();
+  const contact = items[0];
+
+  if (!contact) {
+    return undefined;
+  }
+  return contact;
+}
+
 export async function subscribeUserEmail(email: string) {
   const { createContact, queryContacts, onContactCreated } = getWixElevatedClient().use(contacts);
   const { upsertEmailSubscription } = getWixElevatedClient().use(emailSubscriptions);
@@ -701,3 +727,128 @@ export async function subscribeUserEmail(email: string) {
   });
   return response;
 }
+
+export const getWixMemberClient = () => {
+  let sessionTokens;
+  try {
+    const cookieStore = cookies();
+    sessionTokens = JSON.parse(cookieStore.get(WIX_SESSION_COOKIE)?.value || '{}');
+  } catch (e) {}
+  const wixClient = createClient({
+    modules: { members, plans, orders, groups },
+    auth: OAuthStrategy({
+      clientId: process.env.WIX_CLIENT_ID!,
+      tokens: sessionTokens
+    })
+  });
+  return wixClient;
+};
+export async function isMemberLoggedIn() {
+  return getWixMemberClient().auth.loggedIn();
+}
+
+export async function logMemberIn(originalUri?: string) {}
+
+export async function getCurrentMember() {
+  const isLoggedIn = await isMemberLoggedIn();
+  if (isLoggedIn) {
+    const { member } = await getWixMemberClient().members.getCurrentMember();
+    return member;
+  } else {
+    return undefined;
+  }
+}
+
+export async function getCurrentMemberExtended() {
+  const isLoggedIn = await isMemberLoggedIn();
+  if (isLoggedIn) {
+    const { member } = await getWixMemberClient().members.getCurrentMember({
+      fieldsets: [members.Set.EXTENDED]
+    });
+    return member;
+  } else {
+    return undefined;
+  }
+}
+
+export async function updateMemberSlug(
+  slug: string
+): Promise<members.UpdateMySlugResponse | undefined> {
+  return await getWixMemberClient().members.updateCurrentMemberSlug(slug);
+}
+
+export async function updateMemberProfile(
+  _id: string,
+  updateObject: members.UpdateMember
+): Promise<members.Member | undefined> {
+  return await getWixMemberClient().members.updateMember(_id, updateObject);
+}
+
+export async function getGroup(id: string) {
+  return await getWixMemberClient().groups.getGroup(id);
+}
+
+export async function getMemberPlans() {
+  const currentMemberID = await getCurrentMember().then((data) => (data ? data._id : null));
+  if (!currentMemberID) return undefined;
+  const currentMemberGroups = await getWixMemberClient()
+    .fetchWithAuth(
+      `https://www.wixapis.com/social-groups-proxy/members/v2/members/${currentMemberID}/memberships`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8'
+        }
+      }
+    )
+    .then((response) => response.json())
+    .then(async (memberGroups) => {
+      await Promise.all(
+        memberGroups.memberships.map(async (group: Membership, i: number) => {
+          const groupDetails = await getGroup(group.groupId);
+          memberGroups.memberships[i]['groupDetails'] = groupDetails;
+        })
+      );
+      return memberGroups;
+    });
+  return currentMemberGroups || undefined;
+}
+
+export async function getTeaseServices(): Promise<Service[] | undefined> {
+  const { queryDataItems } = getWixClient().use(items);
+  const { items: services } = await queryDataItems({ dataCollectionId: 'Services' }).find();
+  return services.map((service, i: number) => ({
+    _id: service.data!._id,
+    tagline: service.data!.tagline || undefined,
+    icon: service.data!.icon
+      ? {
+          url: media.getImageUrl(service.data!.icon).url,
+          altText: media.getImageUrl(service.data!.icon).altText || 'altText',
+          height: media.getImageUrl(service.data!.icon).height,
+          width: media.getImageUrl(service.data!.icon).width
+        }
+      : undefined,
+    servicePage: service.data?.servicePage,
+    whatGoesDown: service.data?.whatGoesDown,
+    reasonsToBook: service.data?.reasonsToBook,
+    descrption: service.data?.description,
+    title: service.data?.title
+  }));
+}
+
+// export async function updateTeaseGalPageCount(name: string) {
+//   const { queryDataItems, updateDataItem } = getWixElevatedClient().use(items);
+//   const { items: gals } = await queryDataItems({
+//     dataCollectionId: 'TeaseGals'
+//   })
+//     .eq('name', name)
+//     .limit(1)
+//     .find();
+//   if (!gals) return {};
+
+//   const gal = gals[0];
+//   const updatedData = await updateDataItem(gal!._id, {
+//     dataCollectionId: 'TeaseGals',
+//     dataItem: ''
+//   });
+// }

@@ -1,4 +1,5 @@
 import logo from 'assets/images/TT_logo.png';
+import LoginBar from 'components/auth/LoginBar';
 import { getMenu } from 'lib/wix';
 import { Menu } from 'lib/wix/types';
 import Image from 'next/image';
@@ -12,7 +13,7 @@ export async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
 
   return (
-    <nav className="fixed top-0 z-50 flex w-full items-center justify-between bg-neutral-50/70 p-4 shadow-sm backdrop-blur-sm lg:px-6 dark:bg-neutral-900/70">
+    <nav className="bg-nav fixed top-0 z-50 flex w-full items-center justify-between p-4 shadow-sm lg:px-6">
       <div className="flex w-full flex-wrap items-center justify-between">
         <div className="flex">
           <Link
@@ -38,6 +39,7 @@ export async function Navbar() {
             </ul>
           ) : null}
         </div>
+        <LoginBar />
         {/* <div className="hidden items-center gap-4 min-[870px]:flex">
           <Suspense fallback={<SearchSkeleton />}>
             <Search />
