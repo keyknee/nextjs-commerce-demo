@@ -2,6 +2,12 @@ name: Deploy Container
 
 on:
   workflow_dispatch: # Manual trigger
+    inputs:
+      repo_ref:
+        description: 'Version or SHA associated with container build'
+        required: false
+        type: string
+        default: 'latest'
   workflow_call: # Callable by other workflows
     inputs:
       image_tag:
