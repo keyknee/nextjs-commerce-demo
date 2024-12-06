@@ -39,13 +39,14 @@ export async function Navbar() {
             </ul>
           ) : null}
         </div>
-        <LoginBar />
-        {/* <div className="hidden items-center gap-4 min-[870px]:flex">
-          <Suspense fallback={<SearchSkeleton />}>
+
+        <div className="hidden items-center gap-4 min-[870px]:flex">
+          {/* <Suspense fallback={<SearchSkeleton />}>
             <Search />
-          </Suspense>
-          <CartModal />
-        </div> */}
+          </Suspense> */}
+          <LoginBar />
+          {/* <CartModal /> */}
+        </div>
       </div>
       <div className="block flex-none min-[870px]:hidden">
         <Suspense fallback={null}>

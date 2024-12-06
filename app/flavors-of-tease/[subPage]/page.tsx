@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 
+import { ReasonsToBookSection, WhatGoesDownSection } from 'components/page-sections';
 import Prose from 'components/prose';
 import { BrandAccentedHeadings } from 'components/typography';
+import { AnimatedBanner } from 'components/video';
 import { getPage, getTeaseServices } from 'lib/wix';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-
 export async function generateMetadata({
   params
 }: {
@@ -38,23 +39,50 @@ export default async function Page({ params }: { params: { subPage: string } }) 
   const service = await getTeaseServices()
     .then((data) => data?.filter((service) => service.servicePage === page.id) || [])
     .then((data) => data[0]);
-  console.log(page);
+  console.log(params.subPage);
   return (
-    <div>
-      <header className="relative aspect-video w-full">
-        {page.headerImage && (
+    <>
+      {page.headerImage && params.subPage !== 'yoga' && (
+        <header className="relative aspect-video w-full">
           <Image
-            src={page.headerImage!.url}
-            alt={page.headerImage!.altText}
+            src={page.headerImage?.url || ''}
+            alt={page.headerImage?.altText || ''}
             style={{ width: '100%' }}
             fill={true}
           />
-        )}
-        <h1>Tease</h1>
-      </header>
-      <div className="px-12">
-        <section className="flex flex-col items-center">
-          <img src={service?.icon?.url} width={80} />
+          <BrandAccentedHeadings headingLevel={1} headingCopy={`${service?.title} Tease`} />
+        </header>
+      )}{' '}
+      {params.subPage === 'yoga' && (
+        <header className="relative flex aspect-[9/16] w-full flex-col justify-center">
+          <AnimatedBanner
+            className={'aspect-[9/16]'}
+            backgroundImgDetails={page?.headerImage}
+            videoSrcSet={[
+              {
+                src: '/yoga_tease_med.webm',
+                type: 'video/webm'
+              },
+              {
+                src: '/yoga_tease_med.mp4',
+                type: 'video/mp4'
+              }
+            ]}
+          ></AnimatedBanner>
+          <BrandAccentedHeadings
+            className={`z-[2]`}
+            headingLevel={1}
+            headingCopy={`${service?.title} Tease`}
+          />
+        </header>
+      )}
+      <div
+        className={`relative z-[1] ${params.subPage === 'yoga' ? 'mt-portrait -top-portrait' : '-top-video mt-video'} flex min-h-screen w-full flex-col items-center gap-12 bg-neutral-100 px-12 dark:bg-neutral-900`}
+      >
+        <section className="my-8 flex max-w-screen-sm flex-col items-center gap-y-8">
+          <div className="relative h-20 w-20">
+            <Image src={service?.icon?.url || ''} fill={true} alt={`${page.title} icon`} />
+          </div>
           <BrandAccentedHeadings
             headingLevel={2}
             headingCopy={service?.tagline || ''}
@@ -62,30 +90,15 @@ export default async function Page({ params }: { params: { subPage: string } }) 
           />
           <Prose html={service?.descrption || ''} />
         </section>
-        <section className="flex">
-          <div>
-            <BrandAccentedHeadings
-              headingLevel={2}
-              headingCopy={`Why should I book a ${service?.title ?? ''} session?`}
-              variant="AccentLastThree"
-            />
-          </div>
-          <div>
-            <Prose html={service?.reasonsToBook || ''} />
-          </div>
-        </section>
-        <section className="flex">
-          <div>
-            <BrandAccentedHeadings
-              headingLevel={2}
-              headingCopy={`What goes down in a ${service?.title || ''} session?`}
-            />
-          </div>
-          <div>
-            <Prose html={service?.whatGoesDown || ''} />
-          </div>
-        </section>
+        <ReasonsToBookSection
+          serviceTitle={service?.title || ''}
+          copy={service?.reasonsToBook || ''}
+        />
+        <WhatGoesDownSection
+          serviceTitle={service?.title || ''}
+          copy={service?.whatGoesDown || ''}
+        />
       </div>
-    </div>
+    </>
   );
 }

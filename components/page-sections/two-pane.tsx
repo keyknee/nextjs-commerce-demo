@@ -1,4 +1,5 @@
 import OnlyFansLogo from 'assets/images/OF.png';
+import Grid from 'components/grid';
 import Prose from 'components/prose';
 import { BrandAccentedHeadings } from 'components/typography';
 import { getSection } from 'lib/wix';
@@ -125,7 +126,7 @@ export async function OnlyFansBanner() {
             style={{ '--image-url': `url(${section.sectionBackgroundImage.url})` } as CustomStyle}
             className="relative -mb-[120px] h-[400px] w-full bg-[image:var(--image-url)] bg-cover bg-[center_30%] bg-no-repeat lg:mb-0 lg:h-auto"
           >
-            <div className="bg-radial-light dark:bg-radial-dark relative z-[2] h-full w-full" />
+            <div className="relative z-[2] h-full w-full bg-radial-light dark:bg-radial-dark" />
           </div>
         )}
       </PaneWrapper>
@@ -141,19 +142,21 @@ export async function BreakingTheTaboo() {
       {section && (
         <PaneWrapper>
           <div className="w-full lg:max-w-[50%]">
-            <div className="relative flex flex-wrap justify-center gap-1">
-              {section.mediagallery &&
-                section.mediagallery.map((img, i) => (
-                  <Image
-                    className="flex-[1_1_auto] last:w-full md:max-w-[50%] md:last:max-w-none"
-                    key={i}
-                    src={img.url}
-                    height={img.height}
-                    width={img.width}
-                    alt={img.altText}
-                    // style={{ width: '40%', height: 'auto' }}
-                  />
-                ))}
+            <div className="relative flex flex-wrap justify-center gap-2">
+              <Grid className="grid-cols-2 gap-1">
+                {section.mediagallery &&
+                  section.mediagallery.map((img, i) => (
+                    <Image
+                      className="row-span-5 [&:nth-child(2)]:row-span-7 [&:nth-child(4)]:row-span-8"
+                      key={i}
+                      src={img.url}
+                      height={img.height}
+                      width={img.width}
+                      alt={img.altText}
+                      style={{ width: '100%', height: '100%' }}
+                    />
+                  ))}
+              </Grid>
             </div>
           </div>
           <div className="w-full lg:max-w-[50%]">

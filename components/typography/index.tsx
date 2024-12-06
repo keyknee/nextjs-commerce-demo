@@ -1,3 +1,1 @@
-import { BrandAccentedHeadings } from './headings';
-
-export { BrandAccentedHeadings };
+export { BrandAccentedHeadings, WhatGoesDownHeading, WhyBookHeading } from './headings';

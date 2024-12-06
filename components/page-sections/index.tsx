@@ -1,5 +1,6 @@
 import React from 'react';
 import { AboutTotalTeaseExperience, OurPhilosophy } from './centered';
+import { ReasonsToBook, WhatGoesDown } from './column';
 import { FlavorsOfTease, PhotoGrid } from './grid';
 import Testimonials from './testimonials';
 import { BreakingTheTaboo, MeetOurFounder, OnlyFansBanner, WhatIsATotalTease } from './two-pane';
@@ -35,6 +36,8 @@ export const BreakingTheTabooSection = withSectionWrapper(BreakingTheTaboo);
 export const MeetOurFounderSection = withSectionWrapper(MeetOurFounder);
 export const OurPhilosophySection = withSectionWrapper(OurPhilosophy);
 export const PhotoGridSection = withSectionWrapper(PhotoGrid);
+export const ReasonsToBookSection = withSectionWrapper(ReasonsToBook);
+export const WhatGoesDownSection = withSectionWrapper(WhatGoesDown);
 
 /* 
 an additional HOC that allows each page to fetch all of their sections together. 
