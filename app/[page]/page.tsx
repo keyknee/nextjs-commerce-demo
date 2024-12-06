@@ -32,21 +32,20 @@ export default async function Page({ params }: { params: { page: string } }) {
   const page = await getPage(params.page);
   if (!page || params.page === 'home' || page.isSubPage) return notFound();
 
-  interface CustomStyle extends React.CSSProperties {
-    '--image-url': string;
-  }
-
   return (
     <>
       {page.headerImage ? (
-        <div
-          style={{ '--image-url': `url(${page?.headerImage?.url || ''})` } as CustomStyle}
-          className="relative h-96 w-full bg-[image:var(--image-url)] bg-cover bg-[center_30%] bg-no-repeat"
-        >
+        <div className="relative h-96 w-full">
           <BrandAccentedHeadings
             headingCopy={page.title}
             headingLevel={1}
             className="absolute bottom-0 z-10 mb-8 w-full text-white"
+          />
+          <Image
+            src={page?.headerImage?.url}
+            alt={page?.headerImage?.altText}
+            fill={true}
+            priority
           />
           <div className="absolute left-0 top-0 z-[9] h-full w-full bg-gradient-to-t from-red-950" />
         </div>

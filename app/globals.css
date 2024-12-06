@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: MaterialIcon;
+  src: url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -21,7 +26,9 @@
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-neutral-600 dark:focus-visible:ring-offset-neutral-900;
   }
 }
-
+.bg-nav {
+  @apply bg-neutral-50/70 backdrop-blur-sm dark:bg-neutral-900/70;
+}
 .branded-gold-serif {
   @apply font-decorative-serif font-bold uppercase text-theme-secondary;
 }

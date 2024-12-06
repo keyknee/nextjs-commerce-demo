@@ -1,0 +1,1 @@
+export { AnimatedBanner } from './AnimatedBanner';

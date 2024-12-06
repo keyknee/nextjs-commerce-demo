@@ -94,6 +94,7 @@ export type Section = {
   subHeading?: string;
   body: string;
   sectionBackgroundImage?: Image;
+  mediagallery?: Image[];
   createdAt: string;
   updatedAt: string;
 };
@@ -144,4 +145,42 @@ export type Testimonial = {
   name?: string;
   age?: number;
   quote: string;
+};
+
+type MemberAvatar = Omit<Image, 'altText'> & {
+  _id: string;
+};
+
+export type Member = {
+  status: string;
+  contactId: string;
+  profile: {
+    nickname: string;
+    slug: string;
+    photo: MemberAvatar;
+  };
+  privacyStatus: string;
+  activityStatus: string;
+  _id: string;
+  _createdDate: string;
+  _updatedDate: string;
+};
+
+export type Membership = {
+  groupId: string;
+  status: string;
+  role: {
+    value?: string;
+  };
+};
+
+export type Service = {
+  _id: string;
+  title: string;
+  tagline?: string;
+  icon?: Image;
+  descrption?: string;
+  servicePage?: string;
+  whatGoesDown: string;
+  reasonsToBook: string;
 };

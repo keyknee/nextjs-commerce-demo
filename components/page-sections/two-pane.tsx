@@ -1,4 +1,5 @@
 import OnlyFansLogo from 'assets/images/OF.png';
+import Grid from 'components/grid';
 import Prose from 'components/prose';
 import { BrandAccentedHeadings } from 'components/typography';
 import { getSection } from 'lib/wix';
@@ -11,7 +12,9 @@ interface CustomStyle extends React.CSSProperties {
 
 function PaneWrapper({ children }: { children: ReactNode }) {
   return (
-    <div className="mx-auto flex max-w-screen-xl flex-col-reverse lg:flex-row">{children}</div>
+    <div className="mx-auto flex max-w-screen-xl flex-col-reverse gap-x-8 lg:flex-row">
+      {children}
+    </div>
   );
 }
 
@@ -26,12 +29,61 @@ export async function WhatIsATotalTease() {
             headingCopy={section.heading}
             headingLevel={2}
             variant="AccentLastTwo"
+            className="relative z-10 mt-8 max-lg:text-white md:mt-16 lg:mt-0"
           />
-          <Prose className="my-8" html={section.body as string} />
+          <Prose className="my-16 lg:my-8" html={section.body as string} />
         </div>
-        <div className="mx-auto flex max-w-screen-xl flex-col-reverse lg:flex-row">
-          <div className="w-full lg:max-w-[50%]"></div>
-        </div>
+        {section.sectionBackgroundImage && (
+          <div
+            style={{ '--image-url': `url(${section.sectionBackgroundImage.url})` } as CustomStyle}
+            className="relative -mb-[120px] h-[400px] w-full bg-[image:var(--image-url)] bg-cover bg-[center_30%] bg-no-repeat pt-12 lg:mb-0 lg:h-auto"
+          >
+            <div className="relative mx-auto h-full w-full max-w-[445px]">
+              <svg
+                className="absolute left-0 top-0 fill-slate-950/60"
+                preserveAspectRatio="xMidYMid meet"
+                data-bbox="19.5 19.5 161 161"
+                viewBox="19.5 19.5 161 161"
+                height="200"
+                width="200"
+                xmlns="http://www.w3.org/2000/svg"
+                data-type="shape"
+                role="presentation"
+                aria-hidden="true"
+                aria-label=""
+              >
+                <g>
+                  <path d="M100 19.5c-44.449 0-80.5 36.051-80.5 80.5s36.051 80.5 80.5 80.5 80.5-36.051 80.5-80.5-36.051-80.5-80.5-80.5zm0 131.735c-28.247 0-51.235-22.903-51.235-51.235 0-28.247 22.903-51.235 51.235-51.235 28.247 0 51.235 22.903 51.235 51.235 0 28.247-22.988 51.235-51.235 51.235z"></path>
+                </g>
+              </svg>
+              <svg
+                className="absolute bottom-0 left-[120px] fill-theme-primary/60"
+                preserveAspectRatio="xMidYMid meet"
+                data-bbox="20 30.5 160 139"
+                viewBox="20 30.5 160 139"
+                height="200"
+                width="200"
+                xmlns="http://www.w3.org/2000/svg"
+                data-type="shape"
+                role="presentation"
+                aria-hidden="true"
+                aria-label=""
+              >
+                <g>
+                  <path d="M100 30.5l80 139H20l80-139z"></path>
+                </g>
+              </svg>
+              <svg
+                className="absolute left-[200px] top-0 fill-theme-primary/30"
+                height="160"
+                width="160"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="80" cy="80" r="80" />
+              </svg>
+            </div>
+          </div>
+        )}
       </PaneWrapper>
     </>
   ) : null;
@@ -48,17 +100,18 @@ export async function OnlyFansBanner() {
             headingCopy={section.heading}
             headingLevel={2}
             variant="AccentLastTwo"
+            className="relative z-[5]"
           />
           <div className="my-8 inline-flex h-[38px] gap-3">
             <span className="font-decorative-serif text-2xl">Join Us on</span>
             <a
               href="https://onlyfans.com/totalteasexxx"
-              className="inline-flex rounded-lg bg-neutral-100 shadow-md shadow-neutral-500"
+              className="group inline-flex rounded-lg bg-neutral-100 shadow-md shadow-neutral-500 hover:scale-105"
             >
               <Image
                 src={OnlyFansLogo}
                 alt="OnlyFans logo"
-                className="m-2"
+                className="m-2 group-hover:scale-105"
                 style={{
                   height: 'auto',
                   width: '100%'
@@ -72,7 +125,9 @@ export async function OnlyFansBanner() {
           <div
             style={{ '--image-url': `url(${section.sectionBackgroundImage.url})` } as CustomStyle}
             className="relative -mb-[120px] h-[400px] w-full bg-[image:var(--image-url)] bg-cover bg-[center_30%] bg-no-repeat lg:mb-0 lg:h-auto"
-          ></div>
+          >
+            <div className="relative z-[2] h-full w-full bg-radial-light dark:bg-radial-dark" />
+          </div>
         )}
       </PaneWrapper>
     </>
@@ -86,7 +141,24 @@ export async function BreakingTheTaboo() {
     <>
       {section && (
         <PaneWrapper>
-          <div className="w-full lg:max-w-[50%]"></div>
+          <div className="w-full lg:max-w-[50%]">
+            <div className="relative flex flex-wrap justify-center gap-2">
+              <Grid className="grid-cols-2 gap-1">
+                {section.mediagallery &&
+                  section.mediagallery.map((img, i) => (
+                    <Image
+                      className="row-span-5 [&:nth-child(2)]:row-span-7 [&:nth-child(4)]:row-span-8"
+                      key={i}
+                      src={img.url}
+                      height={img.height}
+                      width={img.width}
+                      alt={img.altText}
+                      style={{ width: '100%', height: '100%' }}
+                    />
+                  ))}
+              </Grid>
+            </div>
+          </div>
           <div className="w-full lg:max-w-[50%]">
             <BrandAccentedHeadings
               headingCopy={section.heading}

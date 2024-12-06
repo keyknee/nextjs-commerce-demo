@@ -1,6 +1,7 @@
 'use client';
 
 import { Dialog, Transition } from '@headlessui/react';
+import LoginBar from 'components/auth/LoginBar';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
@@ -70,11 +71,12 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                   <XMarkIcon className="h-6" />
                 </button>
 
-                {/* <div className="mb-4 w-full">
-                  <Suspense fallback={<SearchSkeleton />}>
+                <div className="mb-4 w-full">
+                  {/* <Suspense fallback={<SearchSkeleton />}>
                     <Search />
-                  </Suspense>
-                </div> */}
+                  </Suspense> */}
+                  <LoginBar />
+                </div>
                 {menu.length ? (
                   <ul className="flex w-full flex-col">
                     {menu.map((item: Menu) => (

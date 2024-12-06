@@ -38,6 +38,7 @@ export default async function Testimonials() {
         headingLevel={2}
         variant="AccentFirstAndLast"
       />
+      <p className="my-6 text-center text-2xl">{section.subHeading}</p>
       <Prose className="my-8" html={section.body as string} />
       <div id="carousel-window" className="relative mx-auto my-4 max-w-screen-xl md:flex-row">
         <Carousel>
