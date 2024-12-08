@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import { ReasonsToBookSection, WhatGoesDownSection } from 'components/page-sections';
 import Prose from 'components/prose';
 import { BrandAccentedHeadings } from 'components/typography';
-import { AnimatedBanner } from 'components/video';
 import { getPage, getTeaseServices } from 'lib/wix';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -39,45 +38,22 @@ export default async function Page({ params }: { params: { subPage: string } }) 
   const service = await getTeaseServices()
     .then((data) => data?.filter((service) => service.servicePage === page.id) || [])
     .then((data) => data[0]);
-  console.log(params.subPage);
+  console.log(service);
   return (
     <>
-      {page.headerImage && params.subPage !== 'yoga' && (
-        <header className="relative aspect-video w-full">
+      <header className="relative aspect-video h-96 w-full overflow-hidden">
+        <div className="relative aspect-video w-full">
           <Image
             src={page.headerImage?.url || ''}
             alt={page.headerImage?.altText || ''}
-            style={{ width: '100%' }}
+            style={{ width: '100%', height: '100%' }}
             fill={true}
           />
-          <BrandAccentedHeadings headingLevel={1} headingCopy={`${service?.title} Tease`} />
-        </header>
-      )}{' '}
-      {params.subPage === 'yoga' && (
-        <header className="relative flex aspect-[9/16] w-full flex-col justify-center">
-          <AnimatedBanner
-            className={'aspect-[9/16]'}
-            backgroundImgDetails={page?.headerImage}
-            videoSrcSet={[
-              {
-                src: '/yoga_tease_med.webm',
-                type: 'video/webm'
-              },
-              {
-                src: '/yoga_tease_med.mp4',
-                type: 'video/mp4'
-              }
-            ]}
-          ></AnimatedBanner>
-          <BrandAccentedHeadings
-            className={`z-[2]`}
-            headingLevel={1}
-            headingCopy={`${service?.title} Tease`}
-          />
-        </header>
-      )}
+        </div>
+        <BrandAccentedHeadings headingLevel={1} headingCopy={`${service?.title} Tease`} />
+      </header>
       <div
-        className={`relative z-[1] ${params.subPage === 'yoga' ? 'mt-portrait -top-portrait' : '-top-video mt-video'} flex min-h-screen w-full flex-col items-center gap-12 bg-neutral-100 px-12 dark:bg-neutral-900`}
+        className={`relative z-[1] flex min-h-screen w-full flex-col items-center gap-12 bg-neutral-100 px-12 dark:bg-neutral-900`}
       >
         <section className="my-8 flex max-w-screen-sm flex-col items-center gap-y-8">
           <div className="relative h-20 w-20">
@@ -93,10 +69,12 @@ export default async function Page({ params }: { params: { subPage: string } }) 
         <ReasonsToBookSection
           serviceTitle={service?.title || ''}
           copy={service?.reasonsToBook || ''}
+          image={service?.reasonsToBookImage}
         />
         <WhatGoesDownSection
           serviceTitle={service?.title || ''}
           copy={service?.whatGoesDown || ''}
+          image={service?.whatGoesDownImage}
         />
       </div>
     </>

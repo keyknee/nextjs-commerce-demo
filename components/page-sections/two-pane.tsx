@@ -1,5 +1,4 @@
 import OnlyFansLogo from 'assets/images/OF.png';
-import Grid from 'components/grid';
 import Prose from 'components/prose';
 import { BrandAccentedHeadings } from 'components/typography';
 import { getSection } from 'lib/wix';
@@ -143,7 +142,7 @@ export async function BreakingTheTaboo() {
         <PaneWrapper>
           <div className="w-full lg:max-w-[50%]">
             <div className="relative flex flex-wrap justify-center gap-2">
-              <Grid className="grid-cols-2 gap-1">
+              <div className="grid w-full grid-cols-2 gap-1">
                 {section.mediagallery &&
                   section.mediagallery.map((img, i) => (
                     <Image
@@ -156,7 +155,7 @@ export async function BreakingTheTaboo() {
                       style={{ width: '100%', height: '100%' }}
                     />
                   ))}
-              </Grid>
+              </div>
             </div>
           </div>
           <div className="w-full lg:max-w-[50%]">

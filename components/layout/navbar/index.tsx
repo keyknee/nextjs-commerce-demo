@@ -1,11 +1,13 @@
 import logo from 'assets/images/TT_logo.png';
-import LoginBar from 'components/auth/LoginBar';
+import { LoginBar } from 'components/auth/LoginBar';
+import CartModal from 'components/cart/modal';
 import { getMenu } from 'lib/wix';
 import { Menu } from 'lib/wix/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import MobileMenu from './mobile-menu';
+import Search, { SearchSkeleton } from './search';
 
 const { SITE_NAME } = process.env;
 
@@ -41,11 +43,11 @@ export async function Navbar() {
         </div>
 
         <div className="hidden items-center gap-4 min-[870px]:flex">
-          {/* <Suspense fallback={<SearchSkeleton />}>
+          <Suspense fallback={<SearchSkeleton />}>
             <Search />
-          </Suspense> */}
+          </Suspense>
           <LoginBar />
-          {/* <CartModal /> */}
+          <CartModal />
         </div>
       </div>
       <div className="block flex-none min-[870px]:hidden">

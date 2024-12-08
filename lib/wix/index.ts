@@ -73,6 +73,7 @@ const reshapeCart = (cart: currentCart.Cart): Cart => {
           product: {
             handle: item.url?.split('/').pop() ?? '',
             featuredImage: {
+              id: media.getImageUrl(item.image!).id,
               altText: 'altText' in featuredImage ? featuredImage.altText : 'alt text',
               url: media.getImageUrl(item.image!).url,
               width: media.getImageUrl(item.image!).width,
@@ -406,6 +407,7 @@ export async function getPage(handle: string): Promise<Page | undefined> {
     bodySummary: '',
     headerImage: page.data!.headerImage
       ? {
+          id: media.getImageUrl(page.data!.headerImage).id,
           altText: media.getImageUrl(page.data!.headerImage).altText! || 'alt text',
           url: media.getImageUrl(page.data!.headerImage).url,
           width: media.getImageUrl(page.data!.headerImage).width,
@@ -414,6 +416,7 @@ export async function getPage(handle: string): Promise<Page | undefined> {
       : undefined,
     previewImage: page.data!.previewImage
       ? {
+          id: media.getImageUrl(page.data!.previewImage).id,
           altText: media.getImageUrl(page.data!.previewImage).altText! || 'alt text',
           url: media.getImageUrl(page.data!.previewImage).url,
           width: media.getImageUrl(page.data!.previewImage).width,
@@ -429,6 +432,7 @@ export async function getPage(handle: string): Promise<Page | undefined> {
               title: subPage.title,
               previewImage: subPage.previewImage
                 ? {
+                    id: media.getImageUrl(subPage.previewImage).id,
                     altText: media.getImageUrl(subPage.previewImage).altText! || 'alt text',
                     url: media.getImageUrl(subPage.previewImage).url,
                     width: media.getImageUrl(subPage.previewImage).width,
@@ -477,6 +481,7 @@ export async function getPages(): Promise<Page[]> {
     bodySummary: '',
     headerImage: item.data!.headerImage
       ? {
+          id: media.getImageUrl(item.data!.headerImage).id,
           altText: media.getImageUrl(item.data!.headerImage).altText! || 'alt text',
           url: media.getImageUrl(item.data!.headerImage).url,
           width: media.getImageUrl(item.data!.headerImage).width,
@@ -485,6 +490,7 @@ export async function getPages(): Promise<Page[]> {
       : undefined,
     previewImage: item.data!.previewImage
       ? {
+          id: media.getImageUrl(item.data!.previewImage).id,
           altText: media.getImageUrl(item.data!.previewImage).altText! || 'alt text',
           url: media.getImageUrl(item.data!.previewImage).url,
           width: media.getImageUrl(item.data!.previewImage).width,
@@ -521,6 +527,7 @@ export async function getSection(handle: string): Promise<Section | undefined> {
       body: section.data!.body,
       mediagallery: section.data!.mediagallery
         ? section.data!.mediagallery.map((image: { src: string }) => ({
+            id: media.getImageUrl(image.src).id,
             url: media.getImageUrl(image.src).url,
             altText: media.getImageUrl(image.src).altText! ?? 'alt text',
             width: media.getImageUrl(image.src).width,
@@ -532,6 +539,7 @@ export async function getSection(handle: string): Promise<Section | undefined> {
     };
     if (section.data!.sectionBackgroundImage) {
       data['sectionBackgroundImage'] = {
+        id: media.getImageUrl(section.data!.sectionBackgroundImage).id,
         url: media.getImageUrl(section.data!.sectionBackgroundImage).url,
         altText: media.getImageUrl(section.data!.sectionBackgroundImage).altText! ?? 'alt text',
         width: media.getImageUrl(section.data!.sectionBackgroundImage).width,
@@ -817,11 +825,13 @@ export async function getMemberPlans() {
 export async function getTeaseServices(): Promise<Service[] | undefined> {
   const { queryDataItems } = getWixClient().use(items);
   const { items: services } = await queryDataItems({ dataCollectionId: 'Services' }).find();
+  // console.log(services);
   return services.map((service, i: number) => ({
     _id: service.data!._id,
     tagline: service.data!.tagline || undefined,
     icon: service.data!.icon
       ? {
+          id: media.getImageUrl(service.data!.icon).id,
           url: media.getImageUrl(service.data!.icon).url,
           altText: media.getImageUrl(service.data!.icon).altText || 'altText',
           height: media.getImageUrl(service.data!.icon).height,
@@ -830,7 +840,31 @@ export async function getTeaseServices(): Promise<Service[] | undefined> {
       : undefined,
     servicePage: service.data?.servicePage,
     whatGoesDown: service.data?.whatGoesDown,
+    whatGoesDownImage: service.data?.whatGoesDownImage
+      ? service.data?.whatGoesDownImage?.startsWith('wix:video')
+        ? {
+            id: media.getVideoUrl(service.data!.whatGoesDownImage).id,
+            url: media.getVideoUrl(service.data!.whatGoesDownImage).url,
+            thumbnail: media.getVideoUrl(service.data!.whatGoesDownImage).thumbnail
+          }
+        : {
+            id: media.getImageUrl(service.data!.whatGoesDownImage).url,
+            url: media.getImageUrl(service.data!.whatGoesDownImage).url,
+            altText: media.getImageUrl(service.data!.whatGoesDownImage).altText || 'altText',
+            height: media.getImageUrl(service.data!.whatGoesDownImage).height,
+            width: media.getImageUrl(service.data!.whatGoesDownImage).width
+          }
+      : undefined,
     reasonsToBook: service.data?.reasonsToBook,
+    reasonsToBookImage: service.data?.reasonsToBookImage
+      ? {
+          id: media.getImageUrl(service.data!.reasonsToBookImage).url,
+          url: media.getImageUrl(service.data!.reasonsToBookImage).url,
+          altText: media.getImageUrl(service.data!.reasonsToBookImage).altText || 'altText',
+          height: media.getImageUrl(service.data!.reasonsToBookImage).height,
+          width: media.getImageUrl(service.data!.reasonsToBookImage).width
+        }
+      : undefined,
     descrption: service.data?.description,
     title: service.data?.title
   }));

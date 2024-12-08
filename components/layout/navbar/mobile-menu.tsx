@@ -1,7 +1,7 @@
 'use client';
 
 import { Dialog, Transition } from '@headlessui/react';
-import LoginBar from 'components/auth/LoginBar';
+import { LoginMobile } from 'components/auth/LoginBar';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
@@ -75,7 +75,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                   {/* <Suspense fallback={<SearchSkeleton />}>
                     <Search />
                   </Suspense> */}
-                  <LoginBar />
+                  <LoginMobile />
                 </div>
                 {menu.length ? (
                   <ul className="flex w-full flex-col">
