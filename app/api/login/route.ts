@@ -4,8 +4,9 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(request: NextRequest) {
   const wixClient = getWixMemberClient();
   const { originalUri } = Object.fromEntries(request.nextUrl.searchParams.entries());
+  const originBase = new URL(`${originalUri}`).host;
   const data = wixClient.auth.generateOAuthData(
-    `${request.nextUrl.protocol}//${request.nextUrl.host}/login-callback`,
+    `${request.nextUrl.protocol}//${originBase}/login-callback`,
     `${originalUri || request.nextUrl.host}`
   );
 
