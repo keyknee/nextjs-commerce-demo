@@ -344,6 +344,7 @@ export async function getCollections(): Promise<Collection[]> {
 export async function getMenu(handle: string): Promise<Menu[]> {
   const { queryDataItems } = getWixClient().use(items);
 
+  // Fetch menu data
   const { items: menus } = await queryDataItems({
     dataCollectionId: 'Menus',
     referencedItemOptions: [{ fieldName: 'pages' }]
@@ -361,14 +362,25 @@ export async function getMenu(handle: string): Promise<Menu[]> {
       }
     });
 
+  // If no menu found, return an empty array
+  if (!menus || menus.length === 0) return [];
+
   const menu = menus[0];
 
-  return (
-    menu?.data!.pages.map((page: { title: string; slug: string }) => ({
-      title: page.title,
-      path: '/' + page.slug
-    })) || []
+  // Fetch subPages for each page in the menu
+  await Promise.all(
+    menu?.data!.pages.map(async (page: { title: string; slug: string; subPages?: Page[] }) => {
+      const pageData = await getPage(page.slug);
+      page['subPages'] = pageData?.subPages || [];
+    })
   );
+
+  // Transform the menu data into the desired format
+  return menu?.data!.pages.map((page: { title: string; slug: string; subPages?: any[] }) => ({
+    title: page.title,
+    path: '/' + page.slug,
+    subPages: page.subPages || []
+  }));
 }
 
 export async function getPage(handle: string): Promise<Page | undefined> {
@@ -422,6 +434,15 @@ export async function getPage(handle: string): Promise<Page | undefined> {
           width: media.getImageUrl(page.data!.previewImage).width,
           height: media.getImageUrl(page.data!.previewImage).height
         }
+      : undefined,
+    photoGallery: page.data!.photoGallery
+      ? page.data!.photoGallery.map((photo: { src: string }) => ({
+          id: media.getImageUrl(photo.src).id,
+          altText: media.getImageUrl(photo.src).altText! || 'alt text',
+          url: media.getImageUrl(photo.src).url,
+          width: media.getImageUrl(photo.src).width,
+          height: media.getImageUrl(photo.src).height
+        }))
       : undefined,
     pageSections: page.data!.PageSections_pages,
     subPages:

@@ -9,9 +9,7 @@ export async function GET(request: NextRequest) {
     `${request.nextUrl.protocol}//${originBase}/login-callback`,
     `${originalUri || request.nextUrl.host}`
   );
-  console.log(
-    `generateOAuthData(${`${request.nextUrl.protocol}//${request.nextUrl.host}/login-callback`},${originalUri || request.nextUrl.host})`
-  );
+
   try {
     const { authUrl } = await wixClient.auth.getAuthUrl(data);
     const response = NextResponse.json({ authUrl });

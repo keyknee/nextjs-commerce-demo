@@ -64,6 +64,7 @@ export type Image = {
 export type Menu = {
   title: string;
   path: string;
+  subPages?: Page[];
 };
 
 export type Money = {
@@ -79,6 +80,7 @@ export type Page = {
   bodySummary: string;
   headerImage?: Image;
   previewImage?: Image;
+  photoGallery?: Image[];
   seo?: SEO;
   createdAt: string;
   updatedAt: string;
