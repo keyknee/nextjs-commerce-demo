@@ -840,21 +840,24 @@ export async function getTeaseServices(): Promise<Service[] | undefined> {
       : undefined,
     servicePage: service.data?.servicePage,
     whatGoesDown: service.data?.whatGoesDown,
-    whatGoesDownImage: service.data?.whatGoesDownImage
-      ? service.data?.whatGoesDownImage?.startsWith('wix:video')
+    whatGoesDownImage:
+      service.data?.whatGoesDownImage && service.data?.whatGoesDownImage?.startsWith('wix:video')
         ? {
-            id: media.getVideoUrl(service.data!.whatGoesDownImage).id,
-            url: media.getVideoUrl(service.data!.whatGoesDownImage).url,
-            thumbnail: media.getVideoUrl(service.data!.whatGoesDownImage).thumbnail
-          }
-        : {
             id: media.getImageUrl(service.data!.whatGoesDownImage).url,
             url: media.getImageUrl(service.data!.whatGoesDownImage).url,
             altText: media.getImageUrl(service.data!.whatGoesDownImage).altText || 'altText',
             height: media.getImageUrl(service.data!.whatGoesDownImage).height,
             width: media.getImageUrl(service.data!.whatGoesDownImage).width
           }
-      : undefined,
+        : undefined,
+    whatGoesDownVideo:
+      service.data?.whatGoesDownImage && service.data?.whatGoesDownImage?.startsWith('wix:video')
+        ? {
+            id: media.getVideoUrl(service.data!.whatGoesDownImage).id,
+            url: media.getVideoUrl(service.data!.whatGoesDownImage).url,
+            thumbnail: media.getVideoUrl(service.data!.whatGoesDownImage).thumbnail
+          }
+        : undefined,
     reasonsToBook: service.data?.reasonsToBook,
     reasonsToBookImage: service.data?.reasonsToBookImage
       ? {

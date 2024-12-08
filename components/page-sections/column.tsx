@@ -1,5 +1,5 @@
 import { WhatGoesDownHeading, WhyBookHeading } from 'components/typography';
-import type { Image as ImageType } from 'lib/wix/types';
+import type { Image as ImageType, Video } from 'lib/wix/types';
 import Image from 'next/image';
 import { ReactNode } from 'react';
 import { ServicesReasons } from './partitioning';
@@ -8,6 +8,7 @@ interface Props {
   serviceTitle: string;
   copy: string;
   image?: ImageType;
+  video?: Video;
 }
 
 function StackedWrapper({ children }: { children: ReactNode }) {
@@ -43,7 +44,7 @@ export async function ReasonsToBook(props: Props) {
 }
 
 export async function WhatGoesDown(props: Props) {
-  const { serviceTitle, copy, image } = props;
+  const { serviceTitle, copy, image, video } = props;
   return (
     <StackedWrapper>
       <div className="w-full min-w-80">

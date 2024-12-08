@@ -183,7 +183,8 @@ export type Service = {
   descrption?: string;
   servicePage?: string;
   whatGoesDown: string;
-  whatGoesDownImage?: Image | Video;
+  whatGoesDownImage?: Image;
+  whatGoesDownVideo?: Video;
   reasonsToBook: string;
   reasonsToBookImage?: Image;
 };

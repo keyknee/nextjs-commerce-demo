@@ -75,6 +75,7 @@ export default async function Page({ params }: { params: { subPage: string } }) 
           serviceTitle={service?.title || ''}
           copy={service?.whatGoesDown || ''}
           image={service?.whatGoesDownImage}
+          video={service?.whatGoesDownVideo}
         />
       </div>
     </>
