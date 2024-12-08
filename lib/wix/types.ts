@@ -54,6 +54,7 @@ export type Collection = {
 };
 
 export type Image = {
+  id?: string;
   url: string;
   altText: string;
   width: number;
@@ -182,5 +183,15 @@ export type Service = {
   descrption?: string;
   servicePage?: string;
   whatGoesDown: string;
+  whatGoesDownImage?: Image;
+  whatGoesDownVideo?: Video;
   reasonsToBook: string;
+  reasonsToBookImage?: Image;
+};
+
+export type Video = {
+  id: string;
+  url: string;
+  thumbnail: string;
+  filename?: string;
 };
