@@ -30,7 +30,7 @@ export async function generateMetadata({
 
 export default async function FlavorsOfTeasePage({ params }: { params: { page: string } }) {
   const page = await getPage('flavors-of-tease');
-  console.log(params);
+  // console.log(page);
   if (!page) return notFound();
 
   interface CustomStyle extends React.CSSProperties {

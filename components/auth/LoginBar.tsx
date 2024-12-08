@@ -51,9 +51,6 @@ export function LoginBar() {
   useEffect(() => {
     fetchMember();
   }, []);
-  useEffect(() => {
-    console.log(member);
-  }, [member]);
 
   useEffect(() => {
     if (accountMenuOpen) setAccountMenuOpen(false);
@@ -135,10 +132,6 @@ export function LoginMobile() {
     fetchMember();
   }, []);
 
-  useEffect(() => {
-    console.log('account menu open?', accountMenuOpen);
-  }, [accountMenuOpen]);
-
   return (
     <>
       {isLoggedIn ? (
@@ -164,7 +157,12 @@ export function LoginMobile() {
           </div>
         </div>
       ) : (
-        <button onClick={handleLogin}>{'Login'}</button>
+        <button
+          className="font-small-caps font-decorative-serif text-lg font-semibold text-black hover:text-theme-primary dark:text-theme-secondary"
+          onClick={handleLogin}
+        >
+          {'Login'}
+        </button>
       )}
     </>
   );

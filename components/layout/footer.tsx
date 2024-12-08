@@ -8,9 +8,10 @@ import { SocialIcon } from 'react-social-icons';
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
 const socialLinks = [
-  'https://www.instagram.com/_totaltease/',
-  'https://www.tiktok.com/@totalteaseexperie',
-  'https://onlyfans.com/totalteasexxx'
+  'https://www.instagram.com/totalteaseexperience_',
+  'https://www.tiktok.com/@totalteaseexperience',
+  'https://x.com/totalteasexxx'
+  // 'https://onlyfans.com/totalteasexxx'
 ];
 
 export default async function Footer() {
