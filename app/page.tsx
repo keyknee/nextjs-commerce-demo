@@ -1,5 +1,7 @@
+// import EmblaCarousel from 'components/embla-carousel';
 import { MailingListForm } from 'components/forms';
 import { sectionFetcher } from 'components/page-sections';
+import { ProductShowcase } from 'components/product/showcase';
 import { getPage } from 'lib/wix';
 import Image from 'next/image';
 
@@ -16,12 +18,9 @@ interface CustomStyle extends React.CSSProperties {
 
 export default async function HomePage() {
   const page = await getPage('home');
-  // console.log(page);
   return (
     <>
-      <div
-      // style={{ '--image-url': `url(${page?.headerImage?.url || ''})` } as CustomStyle}
-      >
+      <div>
         <div className="relative aspect-[9/16] w-full max-md:min-h-screen">
           <Image
             src={page?.headerImage?.url || ''}
@@ -39,7 +38,9 @@ export default async function HomePage() {
             </h1>
           </div>
         </div>
+        {/* <EmblaCarousel photos={page?.photoGallery || []} /> */}
         {page?.pageSections && sectionFetcher(page.pageSections.map((section) => section.title))}
+        <ProductShowcase productSlug={'sex-talk-101-ways-to-make-money-with-no-contact-sex-work'} />
         <MailingListForm />
       </div>
     </>

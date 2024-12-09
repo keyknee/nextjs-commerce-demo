@@ -57,7 +57,11 @@ export async function WhatGoesDown(props: Props) {
             <div className="absolute left-0 top-0 z-[2] h-full w-full bg-radial-light dark:bg-radial-dark" />
           </div>
         ) : (
-          <></>
+          <div className="relative mx-auto max-h-[768px] max-w-screen-sm overflow-hidden">
+            <video autoPlay muted loop poster={video?.thumbnail} playsInline>
+              <source src={video?.url} type={'video/webm'} />
+            </video>
+          </div>
         )}
         <WhatGoesDownHeading
           headingLevel={2}

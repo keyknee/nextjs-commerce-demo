@@ -871,14 +871,13 @@ export async function getTeaseServices(): Promise<Service[] | undefined> {
             width: media.getImageUrl(service.data!.whatGoesDownImage).width
           }
         : undefined,
-    whatGoesDownVideo:
-      service.data?.whatGoesDownImage && service.data?.whatGoesDownImage?.startsWith('wix:video')
-        ? {
-            id: media.getVideoUrl(service.data!.whatGoesDownImage).id,
-            url: media.getVideoUrl(service.data!.whatGoesDownImage).url,
-            thumbnail: media.getVideoUrl(service.data!.whatGoesDownImage).thumbnail
-          }
-        : undefined,
+    whatGoesDownVideo: service.data?.whatGoesDownVideo
+      ? {
+          id: media.getVideoUrl(service.data!.whatGoesDownVideo).id,
+          url: media.getVideoUrl(service.data!.whatGoesDownVideo).url,
+          thumbnail: media.getVideoUrl(service.data!.whatGoesDownVideo).thumbnail
+        }
+      : undefined,
     reasonsToBook: service.data?.reasonsToBook,
     reasonsToBookImage: service.data?.reasonsToBookImage
       ? {

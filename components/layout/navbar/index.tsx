@@ -21,12 +21,12 @@ export async function Navbar() {
           <Link
             href="/"
             prefetch={true}
-            className="mr-2 flex w-full items-center justify-center py-6 min-[870px]:w-auto lg:mr-6"
+            className="mr-2 flex w-full items-center justify-center py-6 min-[900px]:w-auto lg:mr-6"
           >
             <Image src={logo} alt="Total Tease logo" height={50} />
           </Link>
           {menu.length ? (
-            <ul className="hidden gap-6 text-sm min-[870px]:flex min-[870px]:items-center">
+            <ul className="hidden gap-6 text-sm min-[900px]:flex min-[900px]:items-center">
               {menu.map((item: Menu) => (
                 <li
                   className="group font-small-caps relative py-8 font-decorative-serif text-lg font-semibold text-black underline-offset-8 hover:text-black hover:text-theme-primary hover:underline dark:text-theme-secondary dark:hover:text-theme-primary"
@@ -63,7 +63,7 @@ export async function Navbar() {
           ) : null}
         </div>
 
-        <div className="hidden items-center gap-4 min-[870px]:flex">
+        <div className="hidden items-center gap-4 min-[900px]:flex">
           <Suspense fallback={<SearchSkeleton />}>
             <Search />
           </Suspense>
@@ -71,7 +71,7 @@ export async function Navbar() {
           <LoginBar />
         </div>
       </div>
-      <div className="block flex-none min-[870px]:hidden">
+      <div className="block flex-none min-[900px]:hidden">
         <Suspense fallback={null}>
           <MobileMenu menu={menu} />
         </Suspense>
