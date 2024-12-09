@@ -11,7 +11,7 @@ interface CustomStyle extends React.CSSProperties {
 
 function PaneWrapper({ children }: { children: ReactNode }) {
   return (
-    <div className="mx-auto flex max-w-screen-xl flex-col-reverse gap-x-8 lg:flex-row">
+    <div className="relative mx-auto flex max-w-screen-xl flex-col-reverse gap-x-8 lg:flex-row">
       {children}
     </div>
   );
@@ -189,7 +189,7 @@ export async function MeetOurFounder() {
           variant="AccentFirstAndLast"
         />
         {section.subHeading && (
-          <h2 className="absolute my-14 text-center font-decorative-script text-2xl font-semibold text-theme-primary lg:static">
+          <h2 className="text-shadow-sm absolute -bottom-20 mt-14 text-center font-decorative-script text-6xl font-semibold text-theme-primary lg:-bottom-12 lg:left-0">
             {section.subHeading}
           </h2>
         )}

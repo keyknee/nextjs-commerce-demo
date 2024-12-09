@@ -41,7 +41,7 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
       <button
         onClick={openMobileMenu}
         aria-label="Open mobile menu"
-        className="flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors min-[870px]:hidden dark:border-neutral-700 dark:text-white"
+        className="flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors min-[900px]:hidden dark:border-neutral-700 dark:text-white"
       >
         <Bars3Icon className="h-4" />
       </button>
@@ -91,9 +91,9 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                             <div className="grid grid-rows-[0fr] transition-all group-[.open]:grid-rows-1">
                               <div className="overflow-hidden">
                                 <div className="flex flex-col">
-                                  {item.subPages.map((subPage) => (
+                                  {item.subPages.map((subPage, i: number) => (
                                     <Link
-                                      key={subPage.id}
+                                      key={`${i}_${subPage.id}`}
                                       className={`pl-4 text-black no-underline hover:text-theme-primary dark:text-theme-secondary`}
                                       href={`${item.path}/${subPage.handle}`}
                                     >

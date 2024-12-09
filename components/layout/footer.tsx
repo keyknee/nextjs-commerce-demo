@@ -27,16 +27,6 @@ export default async function Footer() {
         <div>
           <Link className="flex items-center gap-2 text-black md:pt-1 dark:text-white" href="/">
             <Image src={logo} alt="Total Tease logo" height={50} />
-            <span className="uppercase">
-              The{' '}
-              <span className="font-decorative-serif text-lg font-semibold text-theme-secondary">
-                {'Total '}
-              </span>
-              <span className="relative -bottom-1 -left-2 -mr-1.5 font-decorative-script text-lg capitalize text-theme-primary">
-                {'Tease '}
-              </span>{' '}
-              Experience
-            </span>
           </Link>
         </div>
         <Suspense
