@@ -23,12 +23,14 @@ export async function WhatIsATotalTease() {
   return section ? (
     <>
       <PaneWrapper>
-        <div className="w-full lg:max-w-[50%]">
+        <div className="relative w-full lg:max-w-[50%]">
           <BrandAccentedHeadings
             headingCopy={section.heading}
             headingLevel={2}
-            variant="AccentLastTwo"
+            variant="AccentFirstTwo"
             className="relative z-10 mt-8 max-lg:text-white md:mt-16 lg:mt-0"
+            animate={true}
+            animateEntryDirection={'left'}
           />
           <Prose className="my-16 lg:my-8" html={section.body as string} />
         </div>
@@ -163,6 +165,8 @@ export async function BreakingTheTaboo() {
               headingCopy={section.heading}
               headingLevel={2}
               variant="AccentFirstAndLast"
+              animate={true}
+              animateEntryDirection="right"
             />
             <Prose className="my-8" html={section.body as string} />
           </div>

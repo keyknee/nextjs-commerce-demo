@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: MaterialIcon;
-  src: url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
-}
-
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -24,6 +19,18 @@
   input,
   button {
     @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-50 dark:focus-visible:ring-neutral-600 dark:focus-visible:ring-offset-neutral-900;
+  }
+}
+
+@layer components {
+  .scroll-animate {
+    @apply motion-safe:transform motion-safe:transition-all motion-safe:duration-1000;
+  }
+  .delay-children {
+    @apply [&:nth-child(2)]:delay-100 [&:nth-child(3)]:delay-200 [&:nth-child(4)]:delay-300 [&:nth-child(5)]:delay-['400ms'] [&:nth-child(6)]:delay-500;
+  }
+  .delay-children-cols {
+    @apply even:delay-100;
   }
 }
 .bg-nav {

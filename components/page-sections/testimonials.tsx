@@ -42,8 +42,8 @@ export default async function Testimonials() {
       <Prose className="my-8" html={section.body as string} />
       <div id="carousel-window" className="relative mx-auto my-4 max-w-screen-xl md:flex-row">
         <Carousel>
-          {testimonials.map((testimonial) => (
-            <TestimonialQuote {...testimonial} key={testimonial.id} />
+          {testimonials.map((testimonial, i: number) => (
+            <TestimonialQuote key={`${i}_${testimonial.id}`} {...testimonial} />
           ))}
         </Carousel>
       </div>

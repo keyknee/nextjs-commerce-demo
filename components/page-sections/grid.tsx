@@ -16,9 +16,9 @@ export async function FlavorsOfTease() {
         variant="AccentLastThree"
       />
       <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {teasePages?.map((subPage) => (
+        {teasePages?.map((subPage, i: number) => (
           <Link
-            key={subPage.id}
+            key={`${i}_${subPage.id}`}
             className="aspect-video w-full"
             href={`/flavors-of-tease/${subPage.handle}`}
           >
@@ -47,9 +47,9 @@ export async function PhotoGrid() {
     <>
       {section?.mediagallery ? (
         <Grid className="grid-cols-1 gap-0.5 sm:grid-cols-2 lg:grid-cols-3">
-          {section.mediagallery.map((image) => (
+          {section.mediagallery.map((image, i: number) => (
             <Image
-              key={image.url}
+              key={`${i}_${image.url}`}
               src={image!.url}
               alt={image!.altText}
               height={image!.height}
