@@ -79,11 +79,11 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
 
                 {menu.length ? (
                   <ul className="flex w-full flex-col">
-                    {menu.map((item: Menu) => (
+                    {menu.map((item: Menu, i: number) => (
                       <li
                         onClick={toggleSubMenu}
                         className="group font-small-caps relative py-2 font-decorative-serif text-lg font-semibold text-black underline-offset-8 transition-colors hover:text-black hover:text-theme-primary dark:text-theme-secondary dark:hover:text-theme-primary"
-                        key={item.title}
+                        key={`${i}_${item.title}`}
                       >
                         {item.subPages?.length ? (
                           <>

@@ -3,6 +3,7 @@ into containers (such as divs) so that flex and grid layout flows can be used
 more easily */
 
 // import clsx from 'clsx';
+import { OnScrollListItem } from 'components/animated';
 import { JSDOM } from 'jsdom';
 import React from 'react';
 
@@ -42,14 +43,14 @@ export function ServicesReasons(props: Props) {
   return (
     <ul className={className}>
       {partitions.map((group, index) => (
-        <li key={index} className="prose">
+        <OnScrollListItem key={index} className="delay-children sm:delay-children-col prose">
           {group.map((node, idx) =>
             React.createElement(node.tagName.toLowerCase(), {
               key: idx,
               dangerouslySetInnerHTML: { __html: node.innerHTML }
             })
           )}
-        </li>
+        </OnScrollListItem>
       ))}
     </ul>
   );

@@ -10,6 +10,7 @@ export default async function AboutTotalTeaseExperience() {
         headingCopy={section.heading}
         headingLevel={2}
         variant="AccentLastTwo"
+        animate={true}
       />
       <Prose className="my-8" html={section.body as string} />
     </>

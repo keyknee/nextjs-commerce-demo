@@ -27,10 +27,10 @@ export async function Navbar() {
           </Link>
           {menu.length ? (
             <ul className="hidden gap-6 text-sm min-[900px]:flex min-[900px]:items-center">
-              {menu.map((item: Menu) => (
+              {menu.map((item: Menu, i: number) => (
                 <li
                   className="group font-small-caps relative py-8 font-decorative-serif text-lg font-semibold text-black underline-offset-8 hover:text-black hover:text-theme-primary hover:underline dark:text-theme-secondary dark:hover:text-theme-primary"
-                  key={item.title}
+                  key={`${i}_${item.title}`}
                 >
                   {item.subPages?.length ? (
                     <>
@@ -38,8 +38,9 @@ export async function Navbar() {
                       <div
                         className={`bg-nav absolute top-[90px] hidden w-[200px] flex-col gap-y-4 rounded-md p-4 group-hover:flex`}
                       >
-                        {item.subPages.map((subPage) => (
+                        {item.subPages.map((subPage, i: number) => (
                           <Link
+                            key={`${i}_${subPage.id}`}
                             className="text-black hover:text-black hover:text-theme-primary hover:underline dark:text-theme-secondary dark:hover:text-theme-primary"
                             href={`${item.path}/${subPage.handle}`}
                           >

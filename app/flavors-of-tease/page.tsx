@@ -58,8 +58,9 @@ export default async function FlavorsOfTeasePage({ params }: { params: { page: s
       {page.subPages && (
         <section className="p-6 md:p-12">
           <div className="flex flex-wrap gap-y-8">
-            {page.subPages.map((subPage) => (
+            {page.subPages.map((subPage, i: number) => (
               <Link
+                key={`${i}_${subPage.id}`}
                 className="card group mx-auto flex w-full max-w-[565px] justify-between border border-theme-primary/60 hover:border-theme-secondary/60 hover:shadow-md hover:shadow-theme-secondary"
                 href={`${page.handle}/${subPage.handle}`}
               >
