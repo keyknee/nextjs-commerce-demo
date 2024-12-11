@@ -80,6 +80,9 @@ module.exports = {
           backgroundSize: '100vw',
           backgroundRepeat: 'no-repeat'
         },
+        '.embla-touch': {
+          touchAction: 'pan-y pinch-zoom'
+        },
         '.font-small-caps': {
           fontVariant: 'small-caps'
         },
@@ -91,6 +94,9 @@ module.exports = {
         },
         '.text-shadow-tiny': {
           textShadow: '0px 1px 1px black'
+        },
+        '.traslate3d-start': {
+          transform: 'translate3d(0, 0, 0)'
         }
       });
     })

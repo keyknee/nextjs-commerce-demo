@@ -15,13 +15,13 @@ export async function Navbar() {
   const menu = await getMenu('next-js-frontend-header-menu');
 
   return (
-    <nav className="bg-nav fixed top-0 z-50 flex w-full items-center justify-between px-4 shadow-sm lg:px-6">
+    <nav className="bg-nav fixed top-0 z-50 flex w-full items-center justify-between px-4 shadow-sm lg:px-5">
       <div className="flex w-full flex-wrap items-center justify-between">
         <div className="flex">
           <Link
             href="/"
             prefetch={true}
-            className="mr-2 flex w-full items-center justify-center py-6 min-[900px]:w-auto lg:mr-6"
+            className="mr-2 flex w-full items-center justify-center py-6 min-[900px]:w-auto lg:mr-5"
           >
             <Image src={logo} alt="Total Tease logo" height={50} />
           </Link>

@@ -1,0 +1,1 @@
+export { CarouselFade } from './CarouselFade';
