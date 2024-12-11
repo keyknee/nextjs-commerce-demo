@@ -12,7 +12,9 @@ interface WrapperProps {
 
 //the shared section wrapper
 const SectionWrapper: React.FC<WrapperProps> = ({ children }) => (
-  <section className="w-full bg-neutral-100 p-12 shadow-md dark:bg-neutral-900">{children}</section>
+  <section className="my-[14vw] w-full bg-neutral-100 p-12 shadow-md md:my-[7vw] dark:bg-neutral-900">
+    {children}
+  </section>
 );
 
 //withSectionWrapper HOC

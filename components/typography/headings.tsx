@@ -37,7 +37,7 @@ export function BrandAccentedHeadings(props: AccentProps) {
             { '-translate-x-10': !isVisible && animate && animateEntryDirection === 'left' },
             { 'translate-x-10': !isVisible && animate && animateEntryDirection === 'right' },
             {
-              '-translate-y-10':
+              '-translate-y-20':
                 !isVisible &&
                 animate &&
                 (animateEntryDirection === 'bottom' || !animateEntryDirection)
@@ -57,14 +57,14 @@ export function BrandAccentedHeadings(props: AccentProps) {
         HeadingTag,
         {
           className: clsx(
-            `${animate ? `scroll-animate` : null} text-shadow-sm text-center font-decorative-serif text-5xl font-semibold uppercase`,
+            `${animate ? `scroll-animate` : null} text-shadow-sm text-center font-decorative-serif text-3xl lg:text-5xl font-semibold uppercase`,
             className,
             { 'opacity-100 translate-0': isVisible && animate },
             { 'opacity-0': !isVisible && animate },
             { '-translate-x-10': !isVisible && animate && animateEntryDirection === 'left' },
             { 'translate-x-10': !isVisible && animate && animateEntryDirection === 'right' },
             {
-              '-translate-y-10':
+              'translate-y-20':
                 !isVisible &&
                 animate &&
                 (animateEntryDirection === 'bottom' || !animateEntryDirection)
@@ -75,7 +75,7 @@ export function BrandAccentedHeadings(props: AccentProps) {
         <>
           <span className="branded-gold-serif">{headingParts?.at(0)} </span>
           {headingParts.slice(1, -1).join(' ')}
-          <span className="branded-red-script text-7xl">{headingParts?.at(-1)}</span>
+          <span className="branded-red-script text-5xl lg:text-7xl">{headingParts?.at(-1)}</span>
         </>
       );
 
@@ -91,7 +91,7 @@ export function BrandAccentedHeadings(props: AccentProps) {
             { '-translate-x-10': !isVisible && animate && animateEntryDirection === 'left' },
             { 'translate-x-10': !isVisible && animate && animateEntryDirection === 'right' },
             {
-              '-translate-y-10':
+              '-translate-y-20':
                 !isVisible &&
                 animate &&
                 (animateEntryDirection === 'bottom' || !animateEntryDirection)
@@ -114,7 +114,7 @@ export function BrandAccentedHeadings(props: AccentProps) {
             `${animate ? `scroll-animate` : null} text-shadow-sm text-center font-decorative-serif text-5xl font-semibold uppercase`,
             className,
             { 'opacity-100 translate-y-0': isVisible && animate },
-            { 'opacity-0 -translate-y-10': !isVisible && animate }
+            { 'opacity-0 -translate-y-20': !isVisible && animate }
           )
         },
         <>
