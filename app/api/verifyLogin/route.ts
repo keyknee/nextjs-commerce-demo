@@ -26,6 +26,7 @@ export async function GET(request: NextRequest) {
   response.cookies.set(WIX_SESSION_COOKIE, JSON.stringify(tokens), {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
     path: '/'
   });
 

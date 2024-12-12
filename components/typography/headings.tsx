@@ -156,7 +156,8 @@ export function WhyBookHeading(props: BookingProps) {
       ref: ref
     },
     <>
-      Why should I book a <span className="branded-gold-serif">{serviceName}</span>
+      Why should I book {`${serviceName.startsWith('Exotic') ? 'an' : 'a'}`}{' '}
+      <span className="branded-gold-serif">{serviceName}</span>
       <span className="branded-red-script text-7xl max-sm:text-6xl">Session?</span>
     </>
   );
@@ -181,7 +182,8 @@ export function WhatGoesDownHeading(props: BookingProps) {
       ref: ref
     },
     <>
-      What goes down in a <span className="branded-gold-serif">{serviceName}</span>
+      What goes down in {`${serviceName.startsWith('Exotic') ? 'an' : 'a'}`}{' '}
+      <span className="branded-gold-serif">{serviceName}</span>
       <span className="branded-red-script text-7xl max-sm:text-6xl">Session?</span>
     </>
   );
