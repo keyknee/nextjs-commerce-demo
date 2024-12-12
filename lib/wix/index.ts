@@ -547,13 +547,23 @@ export async function getSection(handle: string): Promise<Section | undefined> {
       subHeading: section.data!.subHeading,
       body: section.data!.body,
       mediagallery: section.data!.mediagallery
-        ? section.data!.mediagallery.map((image: { src: string }) => ({
-            id: media.getImageUrl(image.src).id,
-            url: media.getImageUrl(image.src).url,
-            altText: media.getImageUrl(image.src).altText! ?? 'alt text',
-            width: media.getImageUrl(image.src).width,
-            height: media.getImageUrl(image.src).height
-          }))
+        ? section.data!.mediagallery.map((item: { type: string; src: string }) => {
+            if (item.type === 'video') {
+              return {
+                id: media.getVideoUrl(item.src).id,
+                url: media.getVideoUrl(item.src).url,
+                thumbnail: media.getImageUrl(media.getVideoUrl(item.src).thumbnail).url
+              };
+            } else {
+              return {
+                id: media.getImageUrl(item.src).id,
+                url: media.getImageUrl(item.src).url,
+                altText: media.getImageUrl(item.src).altText! ?? 'alt text',
+                width: media.getImageUrl(item.src).width,
+                height: media.getImageUrl(item.src).height
+              };
+            }
+          })
         : undefined,
       createdAt: section.data!._createdDate.$date,
       updatedAt: section.data!._updatedDate.$date
@@ -875,7 +885,8 @@ export async function getTeaseServices(): Promise<Service[] | undefined> {
       ? {
           id: media.getVideoUrl(service.data!.whatGoesDownVideo).id,
           url: media.getVideoUrl(service.data!.whatGoesDownVideo).url,
-          thumbnail: media.getVideoUrl(service.data!.whatGoesDownVideo).thumbnail
+          thumbnail: media.getImageUrl(media.getVideoUrl(service.data!.whatGoesDownVideo).thumbnail)
+            .url
         }
       : undefined,
     reasonsToBook: service.data?.reasonsToBook,

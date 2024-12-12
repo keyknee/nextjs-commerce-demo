@@ -97,6 +97,10 @@ module.exports = {
         },
         '.traslate3d-start': {
           transform: 'translate3d(0, 0, 0)'
+        },
+        '.video-vignette': {
+          background:
+            'linear-gradient(0deg, #171717 4%, transparent 15%, transparent 85%, #171717 96%)'
         }
       });
     })

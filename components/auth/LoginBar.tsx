@@ -69,7 +69,7 @@ export function LoginBar() {
         className={`align-center flex h-8 w-8 items-center rounded-full ${member?.profile?.photo?.url ? `bg-[image:var(--image-url)]` : 'bg-slate-100 dark:bg-slate-800'} group bg-cover bg-no-repeat shadow-sm shadow-black hover:scale-105`}
       >
         {!member?.profile?.photo?.url ? (
-          <UserCircleIcon className="text-theme-secondary group-hover:text-theme-primary" />
+          <UserCircleIcon className="mx-auto h-6 w-6 text-theme-secondary group-hover:text-theme-primary" />
         ) : null}
       </button>
       <div
