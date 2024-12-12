@@ -32,9 +32,6 @@ importers:
       '@wix/groups':
         specifier: ^1.0.108
         version: 1.0.108
-      '@wix/media':
-        specifier: ^1.0.138
-        version: 1.0.138
       '@wix/members':
         specifier: ^1.0.117
         version: 1.0.117
@@ -668,21 +665,6 @@ packages:
 
   '@wix/image-kit@1.91.0':
     resolution: {integrity: sha512-bh/6BTE5YmZbNQ6PdOBEDxTuC7162muYockjJXHN1rP+2Yhszh9O40N/6qDbQvkdUzgJN5HOTtQTaFLP/1tAig==}
-
-  '@wix/media@1.0.138':
-    resolution: {integrity: sha512-TJrWOU1juqfwGOxIqCmJVObfkwjJ1f+2Hf7rnfnpbr03Fwg3YgFqwhADMWwU2F9St/qJqVxRAW4RVj5m/iUKbA==}
-
-  '@wix/media_enterprise-media-categories@1.0.37':
-    resolution: {integrity: sha512-VwahWk58CMQjA5mZhFKao1F4P88uyoCsiKW3ernwwIdaY+wfQAQvd4ICFevcjvs2K48kRGKI4Ph9m5dQmp5Kdw==}
-
-  '@wix/media_enterprise-media-items@1.0.41':
-    resolution: {integrity: sha512-u8aV6kM0UVrm2aQGj+Uv6n29+1/uzJsYlbIP5o5xJYFYXpP+TH8KirdiJEk7+R1VF8xkAmIUNndd5AqlIOU+5Q==}
-
-  '@wix/media_files@1.0.66':
-    resolution: {integrity: sha512-rS7ZcOhgUeWYHYt3wp0uYTHQ75m53ok8Px9y95ZI81VWlQditiQZuVp4lPi3KXP0fEsBFjKTouOPiLrsGiD0HQ==}
-
-  '@wix/media_folders@1.0.42':
-    resolution: {integrity: sha512-wtIiLgFetrqYknQtM8E3h+Ri3jB41F3S/5eEaRfe6GWLreGA2tW7IFcrKCLNw8GAbJwFF8BBCthfNV9mi0E69g==}
 
   '@wix/members@1.0.117':
     resolution: {integrity: sha512-V9B0jbJVBJDlU4JgovT8fXvMinC/Kpx8UvgCXa4ZA9dDIl6vNrtP/4VD5AdCtAX/2wpH3zBxe4v7rvG9nA8azg==}
@@ -2490,33 +2472,6 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.25.7
       tslib: 2.7.0
-
-  '@wix/media@1.0.138':
-    dependencies:
-      '@wix/media_enterprise-media-categories': 1.0.37
-      '@wix/media_enterprise-media-items': 1.0.41
-      '@wix/media_files': 1.0.66
-      '@wix/media_folders': 1.0.42
-
-  '@wix/media_enterprise-media-categories@1.0.37':
-    dependencies:
-      '@wix/sdk-runtime': 0.3.23
-      '@wix/sdk-types': 1.12.4
-
-  '@wix/media_enterprise-media-items@1.0.41':
-    dependencies:
-      '@wix/sdk-runtime': 0.3.23
-      '@wix/sdk-types': 1.12.4
-
-  '@wix/media_files@1.0.66':
-    dependencies:
-      '@wix/sdk-runtime': 0.3.23
-      '@wix/sdk-types': 1.12.4
-
-  '@wix/media_folders@1.0.42':
-    dependencies:
-      '@wix/sdk-runtime': 0.3.23
-      '@wix/sdk-types': 1.12.4
 
   '@wix/members@1.0.117':
     dependencies:
