@@ -97,7 +97,7 @@ export type Section = {
   subHeading?: string;
   body: string;
   sectionBackgroundImage?: Image;
-  mediagallery?: Image[];
+  mediagallery?: Array<Image | Video>;
   createdAt: string;
   updatedAt: string;
 };
