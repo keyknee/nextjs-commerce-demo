@@ -3,6 +3,7 @@ import { items } from '@wix/data';
 import { currentCart, recommendations } from '@wix/ecom';
 import { emailSubscriptions } from '@wix/email-subscriptions';
 import { groups } from '@wix/groups';
+import { files, folders } from '@wix/media';
 import { members } from '@wix/members';
 import { orders, plans } from '@wix/pricing-plans';
 import { redirects } from '@wix/redirects';
@@ -689,7 +690,9 @@ export const getWixElevatedClient = () => {
     modules: {
       contacts: contacts,
       emailSubscriptions: emailSubscriptions,
-      members: members
+      members: members,
+      folders: folders,
+      files: files
     }
   });
   return wixClient;
@@ -902,6 +905,30 @@ export async function getTeaseServices(): Promise<Service[] | undefined> {
     descrption: service.data?.description,
     title: service.data?.title
   }));
+}
+
+export async function getFolders() {
+  return (await getWixElevatedClient().folders.listFolders()).folders;
+}
+
+export async function getFolderID(folderName: string) {
+  const folders = await getFolders();
+
+  return folders.find((folder) => folder.displayName === folderName)?._id;
+}
+
+export async function getFolderFiles(folderName: string) {
+  const folderID = await getFolderID(folderName);
+  return (await getWixElevatedClient().files.listFiles({ parentFolderId: folderID })).files;
+}
+
+export async function getFooterLegalDocs() {
+  return getFolderFiles('legalDocuments').then((data) =>
+    data.map((file) => ({
+      displayName: file.displayName,
+      url: file.url
+    }))
+  );
 }
 
 // export async function updateTeaseGalPageCount(name: string) {

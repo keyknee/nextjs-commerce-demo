@@ -20,6 +20,7 @@
     "@wix/email-subscriptions": "^1.0.20",
     "@wix/essentials": "^0.1.9",
     "@wix/groups": "^1.0.108",
+    "@wix/media": "^1.0.138",
     "@wix/members": "^1.0.117",
     "@wix/pricing-plans": "^1.0.101",
     "@wix/redirects": "^1.0.58",
