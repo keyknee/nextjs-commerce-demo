@@ -12,39 +12,43 @@ export async function middleware(request: NextRequest) {
   const cookies = request.cookies;
   const sessionCookie = cookies.get(WIX_SESSION_COOKIE);
 
-  let sessionTokens = sessionCookie
-    ? (JSON.parse(sessionCookie.value) as Tokens)
-    : await wixClient.auth.generateVisitorTokens();
+  let sessionTokens: Tokens;
 
-  if (sessionTokens.accessToken.expiresAt < Math.floor(Date.now() / 1000)) {
+  if (sessionCookie) {
+    // Parse existing session cookie
+    sessionTokens = JSON.parse(sessionCookie.value) as Tokens;
+
+    // Check if the session is valid
+    if (sessionTokens.accessToken.expiresAt >= Math.floor(Date.now() / 1000)) {
+      // Valid session, proceed without modifying it
+      return NextResponse.next();
+    }
+
+    // Attempt to renew the session if expired
     try {
       sessionTokens = await wixClient.auth.renewToken(sessionTokens.refreshToken);
     } catch (e) {
-      // if we failed to renew the token with the existing refresh token, it's likely expired
-      // so we generate a new set of tokens for a visitor (this will log out members if they were logged in before)
+      console.warn('Failed to renew session, generating visitor tokens');
       sessionTokens = await wixClient.auth.generateVisitorTokens();
     }
+  } else {
+    // No session cookie, generate visitor tokens
+    sessionTokens = await wixClient.auth.generateVisitorTokens();
   }
 
-  request.cookies.set(WIX_SESSION_COOKIE, JSON.stringify(sessionTokens));
-  const res = NextResponse.next({
-    request
-  });
+  // Set the updated session cookie
+  const res = NextResponse.next();
   res.cookies.set(WIX_SESSION_COOKIE, JSON.stringify(sessionTokens), {
-    maxAge: 60 * 60 * 24 * 12
+    maxAge: 60 * 60 * 24 * 12,
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/'
   });
 
   return res;
 }
 
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    '/((?!_next/static|_next/image|favicon.ico).*)'
-  ]
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)']
 };
