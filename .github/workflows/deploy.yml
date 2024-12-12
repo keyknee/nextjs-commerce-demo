@@ -80,6 +80,7 @@ jobs:
               --env WIX_CLIENT_ID=${{ secrets.WIX_CLIENT_ID }} \
               --env WIX_API_KEY=${{ secrets.WIX_API_KEY }} \
               --env WIX_SITE_ID=${{ secrets.WIX_SITE_ID }} \
+              --env NODE_ENV="production"
               -p ${{ vars.CONTAINER_HOST_PORT }}:3000 \
               ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ inputs.image_tag }}
 

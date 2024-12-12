@@ -29,8 +29,8 @@ function VideoControls({ isPlaying, setIsPlaying, isAudible, setIsAudible }: Vid
   );
 }
 
-export function VideoPlayer(props: Video) {
-  const { url, thumbnail } = props;
+export function VideoPlayer(props: Video & { hideControls?: boolean }) {
+  const { url, thumbnail, hideControls } = props;
   const ref = useRef<HTMLVideoElement>(null);
   const isVisible = useIntersectionObserver(ref, { threshold: 0.1 });
   const [isPlaying, setIsPlaying] = useState(false);
@@ -70,12 +70,14 @@ export function VideoPlayer(props: Video) {
         <source src={url} type={'video/webm'} />
       </video>
       <div className="video-vignette absolute left-0 top-0 h-full w-full" />
-      <VideoControls
-        isPlaying={isPlaying}
-        isAudible={isAudible}
-        setIsAudible={setIsAudible}
-        setIsPlaying={setIsPlaying}
-      />
+      {!hideControls && (
+        <VideoControls
+          isPlaying={isPlaying}
+          isAudible={isAudible}
+          setIsAudible={setIsAudible}
+          setIsPlaying={setIsPlaying}
+        />
+      )}
     </div>
   );
 }

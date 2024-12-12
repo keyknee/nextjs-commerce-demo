@@ -1,4 +1,5 @@
 import { WhatGoesDownHeading, WhyBookHeading } from 'components/typography';
+import { VideoPlayer } from 'components/video/VideoComponent';
 import type { Image as ImageType, Video } from 'lib/wix/types';
 import Image from 'next/image';
 import { ReactNode } from 'react';
@@ -58,15 +59,13 @@ export async function WhatGoesDown(props: Props) {
           </div>
         ) : (
           <div className="relative mx-auto max-h-[768px] max-w-screen-sm overflow-hidden">
-            <video autoPlay muted loop poster={video?.thumbnail} playsInline>
-              <source src={video?.url} type={'video/webm'} />
-            </video>
+            {video && <VideoPlayer {...video} hideControls={true} />}
           </div>
         )}
         <WhatGoesDownHeading
           headingLevel={2}
           serviceName={serviceTitle}
-          className="relative z-10"
+          className="relative z-10 -mt-4"
         />
       </div>
       <div className="w-full">
