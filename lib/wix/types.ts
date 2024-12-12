@@ -197,3 +197,8 @@ export type Video = {
   thumbnail: string;
   filename?: string;
 };
+
+export type Document = {
+  id: string;
+  url: string;
+};

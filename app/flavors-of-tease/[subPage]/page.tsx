@@ -38,7 +38,6 @@ export default async function Page({ params }: { params: { subPage: string } }) 
   const service = await getTeaseServices()
     .then((data) => data?.filter((service) => service.servicePage === page.id) || [])
     .then((data) => data[0]);
-  console.log(service);
   return (
     <>
       <header className="relative aspect-video h-96 w-full overflow-hidden">
