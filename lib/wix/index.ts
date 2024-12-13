@@ -941,6 +941,24 @@ export async function getJoinCommunityBanner() {
   console.log(banner);
 }
 
+export async function getTeaseGals() {
+  const { queryDataItems } = getWixClient().use(items);
+  const { items: gals } = await queryDataItems({
+    dataCollectionId: 'Gals'
+  }).find();
+
+  return gals.map((gal) => ({
+    name: gal.data!.title,
+    url: gal.data!.link,
+    image: {
+      id: media.getImageUrl(gal.data!.image).id,
+      alt: media.getImageUrl(gal.data!.image).altText || `${gal.data!.title} image`,
+      url: media.getImageUrl(gal.data!.image).url,
+      width: media.getImageUrl(gal.data!.image).width,
+      height: media.getImageUrl(gal.data!.image).height
+    }
+  }));
+}
 // export async function updateTeaseGalPageCount(name: string) {
 //   const { queryDataItems, updateDataItem } = getWixElevatedClient().use(items);
 //   const { items: gals } = await queryDataItems({
