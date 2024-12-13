@@ -1,7 +1,11 @@
 import { CarouselFade } from 'components/embla-carousel';
 import { MailingListForm } from 'components/forms';
 // import { sectionFetcher } from 'components/page-sections';
-import { AboutTotalTeaseExperienceSection, TestimonialsSection } from 'components/page-sections';
+import {
+  AboutTotalTeaseExperienceSection,
+  OnlyFansBannerSection,
+  TestimonialsSection
+} from 'components/page-sections';
 import { ProductShowcase } from 'components/product/showcase';
 import { BrandAccentedHeadings } from 'components/typography';
 import { getPage } from 'lib/wix';
@@ -57,6 +61,7 @@ export default async function HomePage() {
           subHeading={'Grab the Ultimate Entertainment eRead!'}
           productSlug={'sex-talk-101-ways-to-make-money-with-no-contact-sex-work'}
         />
+        <OnlyFansBannerSection />
         <TestimonialsSection />
         <MailingListForm />
       </div>

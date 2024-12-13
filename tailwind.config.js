@@ -86,6 +86,10 @@ module.exports = {
           backgroundSize: '100vw',
           backgroundRepeat: 'no-repeat'
         },
+        '.border-gradient-theme-secondary': {
+          borderImage:
+            'linear-gradient(to right,rgb(212, 173, 55),rgb(226, 203, 130), #D4AF37,#d3bb6d, #d4af37) 1'
+        },
         '.embla-touch': {
           touchAction: 'pan-y pinch-zoom'
         },

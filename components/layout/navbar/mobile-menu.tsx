@@ -81,20 +81,20 @@ export default function MobileMenu({ menu }: { menu: Menu[] }) {
                   <ul className="flex w-full flex-col">
                     {menu.map((item: Menu, i: number) => (
                       <li
-                        onClick={toggleSubMenu}
-                        className="group font-small-caps relative py-2 font-decorative-serif text-lg font-semibold text-black underline-offset-8 transition-colors hover:text-black hover:text-theme-primary dark:text-theme-secondary dark:hover:text-theme-primary"
+                        onClick={(e) => toggleSubMenu(e)}
+                        className="group font-small-caps relative cursor-pointer py-2 font-decorative-serif text-lg font-semibold text-black underline-offset-8 transition-colors hover:text-black hover:text-theme-primary dark:text-theme-secondary dark:hover:text-theme-primary"
                         key={`${i}_${item.title}`}
                       >
                         {item.subPages?.length ? (
                           <>
-                            <span>{item.title}</span>
+                            {item.title}
                             <div className="grid grid-rows-[0fr] transition-all group-[.open]:grid-rows-1">
                               <div className="overflow-hidden">
                                 <div className="flex flex-col">
                                   {item.subPages.map((subPage, i: number) => (
                                     <Link
                                       key={`${i}_${subPage.id}`}
-                                      className={`pl-4 text-black no-underline hover:text-theme-primary dark:text-theme-secondary`}
+                                      className={`py-1 pl-4 text-black no-underline hover:text-theme-primary dark:text-theme-secondary`}
                                       href={`${item.path}/${subPage.handle}`}
                                     >
                                       {subPage.title}

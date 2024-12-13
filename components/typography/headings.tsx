@@ -57,7 +57,7 @@ export function BrandAccentedHeadings(props: AccentProps) {
         HeadingTag,
         {
           className: clsx(
-            `${animate ? `scroll-animate` : null} text-shadow-sm text-center font-decorative-serif text-3xl lg:text-5xl font-semibold uppercase`,
+            `${animate ? `scroll-animate` : null} text-shadow-sm text-center font-decorative-serif max-md:text-3xl text-5xl font-semibold uppercase`,
             className,
             { 'opacity-100 translate-0': isVisible && animate },
             { 'opacity-0': !isVisible && animate },
@@ -75,7 +75,9 @@ export function BrandAccentedHeadings(props: AccentProps) {
         <>
           <span className="branded-gold-serif">{headingParts?.at(0)} </span>
           {headingParts.slice(1, -1).join(' ')}
-          <span className="branded-red-script text-5xl lg:text-7xl">{headingParts?.at(-1)}</span>
+          <span className="branded-red-script text-7xl max-md:text-5xl">
+            {headingParts?.at(-1)}
+          </span>
         </>
       );
 

@@ -51,7 +51,7 @@ export function JoinCommunity() {
             <span className="block text-center text-2xl max-md:text-xl">
               Your World of{' '}
               <span className="text-3xl text-theme-secondary max-md:text-2xl">Refined</span>{' '}
-              <span className="relative -left-2.5 top-2 font-decorative-script text-4xl font-semibold capitalize text-theme-primary max-md:text-2xl">
+              <span className="relative -left-2.5 top-2 font-decorative-script text-4xl font-semibold capitalize text-theme-primary max-md:text-3xl">
                 Pleasure
               </span>{' '}
               Awaits
@@ -65,7 +65,7 @@ export function JoinCommunity() {
             <span className="text-4xl font-semibold text-theme-secondary max-md:text-3xl">
               Refined
             </span>{' '}
-            <span className="relative -left-2.5 top-2 font-decorative-script text-4xl font-semibold capitalize text-theme-primary max-md:text-2xl">
+            <span className="relative -left-2.5 top-2 font-decorative-script text-4xl font-semibold capitalize text-theme-primary max-md:text-3xl">
               Pleasure
             </span>{' '}
             <span className="block text-center text-2xl max-md:text-xl">

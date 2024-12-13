@@ -39,31 +39,31 @@ export default async function FlavorsOfTeasePage({ params }: { params: { page: s
 
   return (
     <>
-      {page.headerImage ? (
-        <div
-          style={{ '--image-url': `url(${page?.headerImage?.url || ''})` } as CustomStyle}
-          className="relative h-96 w-full bg-[image:var(--image-url)] bg-cover bg-[center_30%] bg-no-repeat"
-        >
-          <BrandAccentedHeadings
-            headingCopy={page.title}
-            headingLevel={1}
-            className="absolute bottom-0 z-10 mb-8 w-full text-white"
-          />
-          <div className="absolute left-0 top-0 z-[9] h-full w-full bg-gradient-to-t from-red-950" />
-        </div>
-      ) : (
-        <BrandAccentedHeadings headingCopy={page.title} headingLevel={1} className="mb-8" />
-      )}
+      <BrandAccentedHeadings
+        headingCopy={page.title}
+        headingLevel={1}
+        variant="AccentLastTwo"
+        className="mb-8"
+      />
+
       <Prose className="mb-8" html={page.body as string} />
       <section className="grid max-w-screen-xl grid-cols-2 gap-8 max-md:grid-cols-1">
         {gals.map((gal, i: number) => (
-          <Link href={gal.url || ''} key={`${i}_${gal.name}`}>
+          <Link
+            className="group relative flex flex-col items-center"
+            href={gal.url || ''}
+            key={`${i}_${gal.name}`}
+          >
             <Image
+              className="group-hover:border-gradient-theme-secondary group-hover:border-4"
               alt={gal.image.alt}
               height={gal.image.height}
               width={gal.image.width}
               src={gal.image.url}
             />
+            <h2 className="text-semibold relative -top-2 w-fit -skew-y-3 bg-theme-primary p-2 font-decorative-serif">
+              {gal.name}
+            </h2>
           </Link>
         ))}
       </section>
