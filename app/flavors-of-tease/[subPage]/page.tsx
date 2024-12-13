@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 
+import { JoinCommunity } from 'components/forms/join-community';
 import { ReasonsToBookSection, WhatGoesDownSection } from 'components/page-sections';
 import Prose from 'components/prose';
 import { BrandAccentedHeadings } from 'components/typography';
@@ -77,6 +78,7 @@ export default async function Page({ params }: { params: { subPage: string } }) 
           video={service?.whatGoesDownVideo}
         />
       </div>
+      <JoinCommunity />
     </>
   );
 }

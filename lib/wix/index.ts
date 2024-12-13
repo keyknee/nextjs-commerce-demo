@@ -789,8 +789,6 @@ export async function isMemberLoggedIn() {
   return getWixMemberClient().auth.loggedIn();
 }
 
-export async function logMemberIn(originalUri?: string) {}
-
 export async function getCurrentMember() {
   const isLoggedIn = await isMemberLoggedIn();
   if (isLoggedIn) {
@@ -929,6 +927,18 @@ export async function getFooterLegalDocs() {
       url: file.url
     }))
   );
+}
+
+export async function joinCommunity() {
+  return await getWixMemberClient().members.joinCommunity();
+}
+
+export async function getJoinCommunityBanner() {
+  const { queryDataItems } = getWixClient().use(items);
+  const { items: banner } = await queryDataItems({
+    dataCollectionId: 'JoinCommunityBanner'
+  }).find();
+  console.log(banner);
 }
 
 // export async function updateTeaseGalPageCount(name: string) {

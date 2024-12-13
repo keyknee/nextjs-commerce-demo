@@ -6,11 +6,17 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
+        community: "url('../assets/images/community1.jpg')",
         'textured-gold': "url('../assets/images/gold_textured_bg.jpg')",
         'gradient-theme-primary':
           'linear-gradient(90deg, rgba(93,3,3,1) 0%, rgba(174,16,16,1) 50%, rgba(93,3,3,1) 100%)',
+        'gradient-theme-primary-75':
+          'linear-gradient(90deg, rgba(93,3,3,.75) 0%, rgba(174,16,16,.75) 50%, rgba(93,3,3,.75) 100%)',
+        'textured-gold': "url('../assets/images/gold_textured_bg.jpg')",
         'gradient-theme-secondary':
           'linear-gradient(60deg, rgba(225,194,49,1) 0%, rgba(232,205,79,1) 50%, rgba(225,194,49,1) 100%)',
+        'gradient-theme-secondary-75':
+          'linear-gradient(60deg, #715e06bf 0%, #3d3304bf 20%, #3d3304bf 60%, #715e06bf 100%)',
         'radial-dark':
           'radial-gradient(ellipse closest-side, rgba(0,0,0,0.0) 16%, rgba(23,23,23,1) 95%)',
         'radial-light': 'radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.0) 16%, #f5f5f5 95%)'
