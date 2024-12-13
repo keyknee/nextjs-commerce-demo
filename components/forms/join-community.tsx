@@ -8,8 +8,6 @@ import { join } from './actions';
 export function JoinCommunity() {
   const [member, setMember] = useState<Member | undefined>(undefined);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [requestJoin, setRequestJoin] = useState<boolean>(false);
-  const [banner, setBannerDetails] = useState(undefined);
 
   async function handleLogin() {
     const res = await fetch(`/api/login?originalUri=${window.location.href}`);
@@ -20,7 +18,6 @@ export function JoinCommunity() {
   }
 
   async function handleJoinClick() {
-    setRequestJoin(true);
     if (isLoggedIn) {
       return await join();
     } else {
@@ -46,7 +43,7 @@ export function JoinCommunity() {
   }, []);
 
   return (
-    <div className="bg-community relative flex h-[360px] w-full flex-col items-center justify-end bg-cover py-[4vw] lg:justify-start">
+    <div className="relative flex h-[360px] w-full flex-col items-center justify-end bg-community bg-cover py-[4vw] lg:justify-start">
       {member?.activityStatus === 'ACTIVE' ? (
         <>
           <h2 className="text-shadow-sm relative z-[1] font-decorative-serif text-4xl uppercase max-md:text-2xl">
@@ -83,7 +80,7 @@ export function JoinCommunity() {
           </Form>
         </>
       )}
-      <div className="bg-gradient-theme-secondary-75 absolute left-0 top-0 h-full w-full" />
+      <div className="absolute left-0 top-0 h-full w-full bg-gradient-theme-secondary-75" />
     </div>
   );
 }
