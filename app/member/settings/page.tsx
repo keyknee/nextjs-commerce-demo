@@ -96,7 +96,7 @@ export default async function MemberSettings() {
               <button>Save Changes</button>
             </Form>
           </div>
-          <div>
+          {/* <div>
             <h2>My Groups</h2>
             <ul className="p-4">
               {memberships &&
@@ -114,7 +114,7 @@ export default async function MemberSettings() {
             </ul>
           </div>
           <button className="block">Reset Password</button>
-          <button className="block">Delete Account</button>
+          <button className="block">Delete Account</button> */}
         </>
       )}
     </div>

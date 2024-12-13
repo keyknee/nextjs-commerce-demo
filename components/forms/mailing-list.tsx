@@ -24,7 +24,7 @@ export default function MailingListForm() {
   return (
     <Form
       action={handleSubmit}
-      className="bg-textured-gold flex w-full flex-col items-center justify-center px-6 py-12"
+      className="flex w-full flex-col items-center justify-center bg-textured-gold px-6 py-12"
     >
       {isSubmitted ? (
         <>
@@ -45,9 +45,8 @@ export default function MailingListForm() {
             headingLevel={2}
             variant="AccentFirstAndLast"
           />
-          <div className="my-2 text-center font-decorative-serif text-4xl">
-            <p>Full Site Coming Soon!</p>
-            <p>Join to be Alerted First</p>
+          <div className="my-2 text-center font-decorative-serif text-3xl max-md:text-2xl">
+            <p>We Promise to Only Send Fine Things</p>
           </div>
           <div className="mt-12 flex w-full flex-wrap justify-center gap-6 px-4 md:px-[20%]">
             <label htmlFor="email" className="hidden">
