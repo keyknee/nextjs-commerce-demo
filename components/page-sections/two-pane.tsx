@@ -96,12 +96,12 @@ export async function OnlyFansBanner() {
   return section ? (
     <>
       <PaneWrapper>
-        <div className="two-pane-copy w-full">
+        <div className="two-pane-copy w-full px-6">
           <BrandAccentedHeadings
             headingCopy={section.heading}
             headingLevel={2}
             variant="AccentLastTwo"
-            className="relative z-[5]"
+            className="relative z-[5] max-w-[649px]"
           />
           <div className="my-8 inline-flex h-[38px] gap-3">
             <span className="font-decorative-serif text-2xl">Join Us on</span>
