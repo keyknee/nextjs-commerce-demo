@@ -43,10 +43,10 @@ export function JoinCommunity() {
   }, []);
 
   return (
-    <div className="relative flex h-[360px] w-full flex-col items-center justify-end bg-community bg-cover py-[4vw] lg:justify-start">
+    <div className="relative flex h-[360px] w-full flex-col items-center justify-end bg-community bg-cover px-2 py-[4vw] lg:justify-start">
       {member?.activityStatus === 'ACTIVE' ? (
         <>
-          <h2 className="text-shadow-sm relative z-[1] font-decorative-serif text-4xl uppercase max-md:text-2xl">
+          <h2 className="text-shadow-sm relative z-[1] max-w-[80%] text-center font-decorative-serif text-4xl uppercase max-md:text-2xl">
             You've Joined the Community!
             <span className="block text-center text-2xl max-md:text-xl">
               Your World of{' '}
@@ -60,7 +60,7 @@ export function JoinCommunity() {
         </>
       ) : (
         <>
-          <h2 className="text-shadow-sm relative z-[1] font-decorative-serif text-3xl uppercase max-md:text-2xl">
+          <h2 className="text-shadow-sm relative z-[1] max-w-[80%] text-center font-decorative-serif text-3xl uppercase max-md:text-2xl">
             Enter a World of{' '}
             <span className="text-4xl font-semibold text-theme-secondary max-md:text-3xl">
               Refined
