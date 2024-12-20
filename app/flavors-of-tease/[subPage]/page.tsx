@@ -69,12 +69,12 @@ export default async function Page({ params }: { params: { subPage: string } }) 
         <ReasonsToBookSection
           serviceTitle={service?.title || ''}
           copy={service?.reasonsToBook || ''}
-          image={service?.reasonsToBookImage}
+          images={service?.reasonsToBookImages || []}
         />
         <WhatGoesDownSection
           serviceTitle={service?.title || ''}
           copy={service?.whatGoesDown || ''}
-          image={service?.whatGoesDownImage}
+          images={service?.whatGoesDownImages || []}
           video={service?.whatGoesDownVideo}
         />
       </div>

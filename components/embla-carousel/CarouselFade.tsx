@@ -18,23 +18,39 @@ interface Props {
 
 export function CarouselFade(props: Props) {
   const { photos, containerClassName, slideClassName } = props;
-  const plugins: EmblaPluginType[] = [Autoplay(), Fade()];
+  const plugins: EmblaPluginType[] = [
+    Autoplay({ playOnInit: false, delay: 3000, stopOnInteraction: true }),
+    Fade()
+  ];
   const intersectionRef = useRef<HTMLDivElement>(null);
 
-  const [emblaRef, emblaApi] = useEmblaCarousel({ containScroll: false, duration: 30 }, plugins);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ containScroll: false }, plugins);
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
   const isVisible = useIntersectionObserver(intersectionRef, { threshold: 0.1 });
 
+  function startPlay() {
+    emblaApi?.plugins().autoplay.play();
+  }
+
+  function stopPlay() {
+    emblaApi?.plugins().autoplay.stop();
+  }
+
+  function handleDotButtonClick(index: number) {
+    onDotButtonClick(index);
+    stopPlay();
+  }
+
   useEffect(() => {
     if (!isVisible) {
-      emblaApi?.plugins().autoplay.stop();
+      stopPlay();
     } else {
-      emblaApi?.plugins().autoplay.play();
+      startPlay();
     }
   }, [isVisible]);
 
   return (
-    <div className="embla" ref={intersectionRef}>
+    <div className="embla" ref={intersectionRef} onTouchStart={stopPlay}>
       <div className="embla__viewport overflow-hidden" ref={emblaRef}>
         <div className={clsx('embla__container embla-touch flex', containerClassName)}>
           {photos &&
@@ -61,7 +77,7 @@ export function CarouselFade(props: Props) {
         {scrollSnaps.map((_, index) => (
           <DotButton
             key={index}
-            onClick={() => onDotButtonClick(index)}
+            onClick={() => handleDotButtonClick(index)}
             className={clsx(
               'h-2.5 w-4 cursor-pointer rounded-full border-2 border-theme-secondary hover:border-theme-primary',
               'embla__dot'.concat(
