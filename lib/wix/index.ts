@@ -857,7 +857,6 @@ export async function getMemberPlans() {
 export async function getTeaseServices(): Promise<Service[] | undefined> {
   const { queryDataItems } = getWixClient().use(items);
   const { items: services } = await queryDataItems({ dataCollectionId: 'Services' }).find();
-  // console.log(services);
   return services.map((service, i: number) => ({
     _id: service.data!._id,
     tagline: service.data!.tagline || undefined,
@@ -872,6 +871,15 @@ export async function getTeaseServices(): Promise<Service[] | undefined> {
       : undefined,
     servicePage: service.data?.servicePage,
     whatGoesDown: service.data?.whatGoesDown,
+    whatGoesDownImages: service.data?.whatGoesDownImages
+      ? service.data?.whatGoesDownImages.map((image: { src: string }) => ({
+          id: media.getImageUrl(image.src).url,
+          url: media.getImageUrl(image.src).url,
+          altText: media.getImageUrl(image.src).altText || 'altText',
+          height: media.getImageUrl(image.src).height,
+          width: media.getImageUrl(image.src).width
+        }))
+      : [],
     whatGoesDownImage:
       service.data?.whatGoesDownImage && service.data?.whatGoesDownImage?.startsWith('wix:video')
         ? {
@@ -891,6 +899,16 @@ export async function getTeaseServices(): Promise<Service[] | undefined> {
         }
       : undefined,
     reasonsToBook: service.data?.reasonsToBook,
+    reasonsToBookImages:
+      service.data?.reasonsToBookImages && service.data?.reasonsToBookImages.length
+        ? service.data?.reasonsToBookImages.map((image: { src: string }) => ({
+            id: media.getImageUrl(image.src).url,
+            url: media.getImageUrl(image.src).url,
+            altText: media.getImageUrl(image.src).altText || 'altText',
+            height: media.getImageUrl(image.src).height,
+            width: media.getImageUrl(image.src).width
+          }))
+        : [],
     reasonsToBookImage: service.data?.reasonsToBookImage
       ? {
           id: media.getImageUrl(service.data!.reasonsToBookImage).url,
@@ -938,7 +956,6 @@ export async function getJoinCommunityBanner() {
   const { items: banner } = await queryDataItems({
     dataCollectionId: 'JoinCommunityBanner'
   }).find();
-  console.log(banner);
 }
 
 export async function getTeaseGals() {
@@ -959,19 +976,3 @@ export async function getTeaseGals() {
     }
   }));
 }
-// export async function updateTeaseGalPageCount(name: string) {
-//   const { queryDataItems, updateDataItem } = getWixElevatedClient().use(items);
-//   const { items: gals } = await queryDataItems({
-//     dataCollectionId: 'TeaseGals'
-//   })
-//     .eq('name', name)
-//     .limit(1)
-//     .find();
-//   if (!gals) return {};
-
-//   const gal = gals[0];
-//   const updatedData = await updateDataItem(gal!._id, {
-//     dataCollectionId: 'TeaseGals',
-//     dataItem: ''
-//   });
-// }

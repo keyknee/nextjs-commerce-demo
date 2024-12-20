@@ -186,9 +186,11 @@ export type Service = {
   servicePage?: string;
   whatGoesDown: string;
   whatGoesDownImage?: Image;
+  whatGoesDownImages?: Image[];
   whatGoesDownVideo?: Video;
   reasonsToBook: string;
   reasonsToBookImage?: Image;
+  reasonsToBookImages?: Image[];
 };
 
 export type Video = {
